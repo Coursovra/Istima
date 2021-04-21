@@ -1,0 +1,50 @@
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class SkinButtonView : MonoBehaviour
+{
+    public int Id { get; set; }
+    public bool IsUnlocked;
+    [SerializeField] public Image IsLockedImage;
+    [SerializeField] private Image _sprite;
+    [SerializeField] private SkinInfoScriptableObject _info;
+    [SerializeField] private TMP_Text _nameText;
+    [SerializeField] private TMP_Text _priceText;
+    [SerializeField] private int _damage;
+    [SerializeField] private int _attackSpeed;
+    [SerializeField] private ShopItemInfoPanelView _infoPanelView;
+    private int _price;
+    
+    public int GetPrice()
+    {
+        return _price;
+    }
+
+    private void Start()
+    {
+        //_infoPanelView = FindObjectOfType<ShopItemInfoPanelView>(); //bug: не находит (не активен GO)
+        _price = (int) _info.Price;
+        name = _info.Name;
+        _nameText.text = _info.Name;
+        _priceText.text = _info.Price.ToString();
+        _sprite.sprite = _info.Sprite;
+        _damage = _info.Damage;
+        _attackSpeed = _info.AttackSpeed;
+    }
+
+    public void ShowInfoPanel()
+    {
+        _infoPanelView.gameObject.SetActive(true);
+        SwitchButtonActive(IsUnlocked);
+        _infoPanelView.SkinButton = this;
+        _infoPanelView.ItemNameText.text = _info.Name;
+        _infoPanelView.ItemDescriptionText.text = $"{_info.Description}\n \nDamage: {_damage}\nAttack speed: {_attackSpeed}\n";
+    }
+
+    private void SwitchButtonActive(bool value)
+    {
+        _infoPanelView.BuyButton.gameObject.SetActive(!value);
+        _infoPanelView.SelectButton.gameObject.SetActive(value);
+    }
+}
