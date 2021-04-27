@@ -9,4 +9,5 @@ public class SkinInfoScriptableObject : ScriptableObject
     [SerializeField] public Sprite Sprite;
     [SerializeField] public int Damage;
     [SerializeField] public int AttackSpeed;
+    [SerializeField] public int Id;
 }

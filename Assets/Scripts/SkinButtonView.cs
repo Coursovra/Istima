@@ -20,6 +20,16 @@ public class SkinButtonView : MonoBehaviour
     {
         return _price;
     }
+    
+    public Image GetImage()
+    {
+        return _sprite;
+    }
+
+    public SkinInfoScriptableObject GetSkinInfoScriptableObject()
+    {
+        return _info;
+    }
 
     private void Start()
     {
@@ -31,6 +41,7 @@ public class SkinButtonView : MonoBehaviour
         _sprite.sprite = _info.Sprite;
         _damage = _info.Damage;
         _attackSpeed = _info.AttackSpeed;
+        Id = _info.Id;
     }
 
     public void ShowInfoPanel()

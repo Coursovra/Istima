@@ -9,9 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 365f8a774fd910f40af0827c11c4a2af, type: 3}
-  m_Name: PlayerSkinsScriptableObject
+  m_Script: {fileID: 11500000, guid: 9dcd9757462918643a482333524dca02, type: 3}
+  m_Name: SelectedSkin
   m_EditorClassIdentifier: 
-  PlayerSkins:
-  - {fileID: 0}
-  - {fileID: 0}
+  SelectedSkin: {fileID: 0}

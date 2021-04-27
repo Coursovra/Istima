@@ -12,10 +12,8 @@ public class ShopController : MonoBehaviour
         _infoPanelView = FindObjectOfType<ShopItemInfoPanelView>();
         _infoPanelView.OnBuyButtonClicked += InfoPanelViewOnBuyButtonClicked;
         _shopItems = FindObjectsOfType<SkinButtonView>();
-        var counter = 0;
         foreach (var shopItem in _shopItems)
         {
-            shopItem.Id = counter++;
             if (_mySkins.PlayerSkins.Contains(shopItem))
             {
                 shopItem.IsUnlocked = true;

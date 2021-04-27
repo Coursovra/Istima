@@ -12,6 +12,7 @@ public class ShopItemInfoPanelView : MonoBehaviour
     [SerializeField] public Button BuyButton;
     [SerializeField] private TMP_Text _itemNameText;
     [SerializeField] private TMP_Text _itemDescriptionText;
+    [SerializeField] private SelectedSkinScriptableObject _selectedSkinScriptableObject;
     public event Action<SkinButtonView> OnBuyButtonClicked = delegate(SkinButtonView skinButton) { };
     public event Action<SkinButtonView> OnSelectButtonClicked = delegate(SkinButtonView skinButton) { };
 
@@ -22,7 +23,9 @@ public class ShopItemInfoPanelView : MonoBehaviour
     
     public void SelectButtonClicked()
     {
-        print(SkinButton.name + " selected");
+        var playerSpriteView = FindObjectOfType<PlayerSpriteView>();
+        playerSpriteView.SetSprite(SkinButton.GetImage().sprite);
         OnSelectButtonClicked.Invoke(SkinButton);
+        _selectedSkinScriptableObject.SelectedSkin = SkinButton;
     }
 }
