@@ -10,7 +10,7 @@ public class ScoreView : MonoBehaviour
         set
         {
             _score = value;
-            _text.text = value == 0 ? "Score: 0" : $"Score: {value}";
+            _text.text = value == 0 ? "Счет: 0" : $"Счет: {value}";
             PlayerPrefs.SetInt("CurrentScore", _score);
         }
         get => _score;

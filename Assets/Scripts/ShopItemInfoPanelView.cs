@@ -26,6 +26,6 @@ public class ShopItemInfoPanelView : MonoBehaviour
         var playerSpriteView = FindObjectOfType<PlayerSpriteView>();
         playerSpriteView.SetSprite(SkinButton.GetImage().sprite);
         OnSelectButtonClicked.Invoke(SkinButton);
-        _selectedSkinScriptableObject.SelectedSkin = SkinButton;
+        _selectedSkinScriptableObject.SelectedSkin = SkinButton.GetSkinInfoScriptableObject();
     }
 }

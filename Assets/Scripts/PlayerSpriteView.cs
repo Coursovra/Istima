@@ -7,7 +7,7 @@ public class PlayerSpriteView : MonoBehaviour
 
     private void Start()
     {
-        SetSprite(_selectedSkinScriptableObject.SelectedSkin.GetSkinInfoScriptableObject().Sprite);
+        SetSprite(_selectedSkinScriptableObject.SelectedSkin.Sprite);
     }
     
     public void SetSprite(Sprite sprite)

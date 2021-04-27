@@ -50,7 +50,7 @@ public class SkinButtonView : MonoBehaviour
         SwitchButtonActive(IsUnlocked);
         _infoPanelView.SkinButton = this;
         _infoPanelView.ItemNameText.text = _info.Name;
-        _infoPanelView.ItemDescriptionText.text = $"{_info.Description}\n \nDamage: {_damage}\nAttack speed: {_attackSpeed}\n";
+        _infoPanelView.ItemDescriptionText.text = $"{_info.Description}\n \nУрон: {_damage}\nСкорость атаки: {_attackSpeed}\n";
     }
 
     private void SwitchButtonActive(bool value)
