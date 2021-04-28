@@ -6,12 +6,8 @@ public class UIController : MonoBehaviour
     public GameObject Ui;
     public GameObject ObstacleController;
     public GameObject StartGameObjects;
-    
-    public void SwitchUi(bool value)
-    {
-        Menu.SetActive(!value);
-        Ui.SetActive(value);
-        ObstacleController.SetActive(value);
-        StartGameObjects.SetActive(!value);
-    }
+    public GameObject DeathScreen;
+    public GameObject UpgradePanel;
+    public GameObject ShopPanel;
+    public GameObject ShopButton;
 }
