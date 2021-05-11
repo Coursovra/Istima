@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7752804048068283958}
   - component: {fileID: 4028623760575225166}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Item
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -147,15 +147,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: debb80327ffab464cb84963f917e3c3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsUnlocked: 0
   IsLockedImage: {fileID: 4450271787404501452}
   _sprite: {fileID: 4691227669884094885}
   _info: {fileID: 11400000, guid: 31bd6e33048170e4b8a71b71c3033477, type: 2}
   _nameText: {fileID: 1542595611192387854}
   _priceText: {fileID: 5992002544675950627}
-  _infoPanelView: {fileID: 0}
   _damage: 0
   _attackSpeed: 0
-  Unlocked: 0
+  _infoPanelView: {fileID: 0}
 --- !u!1 &7385449831020356154
 GameObject:
   m_ObjectHideFlags: 0

@@ -115,7 +115,7 @@ GameObject:
   - component: {fileID: -2506209273036827177}
   m_Layer: 0
   m_Name: Obstacle
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -205,6 +205,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hpText: {fileID: 9021443122743589769}
+  _scoreForHit: 5
 --- !u!61 &6604215285203680813
 BoxCollider2D:
   m_ObjectHideFlags: 0

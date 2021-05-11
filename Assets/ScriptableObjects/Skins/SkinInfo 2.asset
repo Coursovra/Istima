@@ -15,7 +15,8 @@ MonoBehaviour:
   Price: 15
   Name: Skin2
   Description: Desc2
-  Sprite: {fileID: 21300000, guid: 6acde61da4a82ea45ade33997a2b5ebc, type: 3}
   Damage: 55
   AttackSpeed: 55
   Id: 2
+  SkinGameObject: {fileID: 5290997808184816059, guid: 19c2fc994fcb01c46917a584fd96cebb,
+    type: 3}

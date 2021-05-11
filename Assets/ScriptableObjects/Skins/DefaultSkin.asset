@@ -15,7 +15,8 @@ MonoBehaviour:
   Price: 0
   Name: Default
   Description: 
-  Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
-  Damage: 1
-  AttackSpeed: 1
+  Damage: 15
+  AttackSpeed: 3
   Id: 0
+  SkinGameObject: {fileID: 4193515187555554694, guid: 440797363c3cf844092f6b380bc57127,
+    type: 3}

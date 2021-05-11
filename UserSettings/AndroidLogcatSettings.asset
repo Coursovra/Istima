@@ -1,13 +1,32 @@
 {
-    "m_SelectedDeviceId": "",
+    "m_SelectedDeviceId": "ce11171b7896eb3503",
     "m_SelectedPackage": {
-        "deviceId": "",
-        "name": "",
-        "processId": 0,
+        "deviceId": "ce11171b7896eb3503",
+        "name": "com.DefaultCompany.Istima",
+        "processId": 22406,
         "exited": false
     },
     "m_SelectedPriority": 0,
-    "m_KnownPackagesForSerialization": [],
+    "m_KnownPackagesForSerialization": [
+        {
+            "deviceId": "ce11171b7896eb3503",
+            "name": "com.DefaultCompany.Istima",
+            "processId": 2747,
+            "exited": false
+        },
+        {
+            "deviceId": "ce11171b7896eb3503",
+            "name": "com.DefaultCompany.Istima",
+            "processId": 19098,
+            "exited": false
+        },
+        {
+            "deviceId": "ce11171b7896eb3503",
+            "name": "com.DefaultCompany.Istima",
+            "processId": 22406,
+            "exited": false
+        }
+    ],
     "m_Tags": {
         "m_Entries": [
             {
@@ -41,9 +60,20 @@
         ]
     },
     "m_MemoryViewerState": {
-        "MemoryWindowHeight": 0.0,
-        "MemoryWindowWidth": 0.0,
-        "MemoryTypeEnabled": [],
+        "MemoryWindowHeight": 300.0,
+        "MemoryWindowWidth": 170.0,
+        "MemoryTypeEnabled": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+        ],
         "MemoryGroup": 2,
         "Behavior": 0
     },

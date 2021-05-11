@@ -15,7 +15,8 @@ MonoBehaviour:
   Price: 100
   Name: Skin2Skin2
   Description: Desc2Desc2Desc2Desc2Desc2Desc2Desc2Desc2Desc2
-  Sprite: {fileID: 21300000, guid: 69e9b7db3e93c454696685545ef2cfc7, type: 3}
   Damage: 1
   AttackSpeed: 1
   Id: 1
+  SkinGameObject: {fileID: 2616331820801122779, guid: f05d22a7f5d672646acb7cc5d7146c56,
+    type: 3}
