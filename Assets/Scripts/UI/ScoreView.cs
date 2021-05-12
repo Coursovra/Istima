@@ -8,12 +8,13 @@ public class ScoreView : MonoBehaviour
         set
         {
             _score = value;
-            _scoreText.text = value == 0 ? "Счет: 0" : $"Счет: {value}";
-            PlayerPrefs.SetInt("Score", _score);
+            _scoreText.text = $"Счет: {value}";
+            PlayerPrefsController.SetScore(_score);
+
         }
         get
         {
-            _scoreText.text = _score == 0 ? "Счет: 0" : $"Счет: {_score}";
+            //_scoreText.text = _score == 0 ? "Счет: 0" : $"Счет: {_score}";
             return _score;
         } 
     }
@@ -23,11 +24,11 @@ public class ScoreView : MonoBehaviour
         set
         {
             _currentScore = value;
-            _scoreText.text = value == 0 ? "Счет: 0" : $"Счет: {_currentScore}";
+            _scoreText.text = $"Счет: {value}";
         }
         get
         {
-            _scoreText.text = _currentScore == 0 ? "Счет: 0" : $"Счет: {_currentScore}";
+            //_scoreText.text = _currentScore == 0 ? "Счет: 0" : $"Счет: {_currentScore}";
             return _currentScore;
         } 
     }

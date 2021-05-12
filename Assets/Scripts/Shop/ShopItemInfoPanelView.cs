@@ -12,9 +12,9 @@ public class ShopItemInfoPanelView : MonoBehaviour
     [SerializeField] public Button BuyButton;
     [SerializeField] private TMP_Text _itemNameText;
     [SerializeField] private TMP_Text _itemDescriptionText;
-    [SerializeField] private SelectedSkinScriptableObject _selectedSkinScriptableObject;
-    public event Action<SkinButtonView> OnBuyButtonClicked = delegate(SkinButtonView skinButton) { };
-    public event Action<SkinButtonView> OnSelectButtonClicked = delegate(SkinButtonView skinButton) { };
+    //[SerializeField] private SelectedSkinScriptableObject _selectedSkinScriptableObject;
+    public static event Action<SkinButtonView> OnBuyButtonClicked = delegate(SkinButtonView skinButton) { };
+    public static event Action<SkinButtonView> OnSelectButtonClicked = delegate(SkinButtonView skinButton) { };
 
     public void BuyButtonClicked()
     {
@@ -24,8 +24,9 @@ public class ShopItemInfoPanelView : MonoBehaviour
     public void SelectButtonClicked()
     {
         var playerSpriteView = FindObjectOfType<PlayerSpriteController>();
-        playerSpriteView.SetSprite(SkinButton.GetImage().sprite);
+        playerSpriteView.SetSelectedSkin(SkinButton.GetSkinView().gameObject);
         OnSelectButtonClicked.Invoke(SkinButton);
-        _selectedSkinScriptableObject.SelectedSkin = SkinButton.GetSkinInfoScriptableObject();
+        //_selectedSkinScriptableObject.SelectedSkin = SkinButton.GetSkinInfoScriptableObject();
+        gameObject.SetActive(false);
     }
 }

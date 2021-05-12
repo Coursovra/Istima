@@ -6,15 +6,19 @@ public class SkinButtonView : MonoBehaviour
 {
     public int Id { get; set; }
     public bool IsUnlocked;
+    public TMP_Text PriceText;
     [SerializeField] public Image IsLockedImage;
     [SerializeField] private Image _sprite;
-    [SerializeField] private SkinInfoScriptableObject _info;
+    [SerializeField] private SkinView _skinView;
+    //[SerializeField] private SkinInfoScriptableObject _info;
     [SerializeField] private TMP_Text _nameText;
-    [SerializeField] private TMP_Text _priceText;
-    [SerializeField] private int _damage;
-    [SerializeField] private int _attackSpeed;
     [SerializeField] private ShopItemInfoPanelView _infoPanelView;
     private int _price;
+    
+    public SkinView GetSkinView()
+    {
+        return _skinView;
+    }
     
     public int GetPrice()
     {
@@ -26,23 +30,16 @@ public class SkinButtonView : MonoBehaviour
         return _sprite;
     }
 
-    public SkinInfoScriptableObject GetSkinInfoScriptableObject()
-    {
-        return _info;
-    }
-
     private void Start()
     {
-        var sprite = _info.SkinGameObject.GetComponent<SpriteRenderer>().sprite;
+        var spriteRenderer = _skinView.SpriteRenderer;
         //_infoPanelView = FindObjectOfType<ShopItemInfoPanelView>(); //bug: не находит (не активен GO)
-        _price = (int) _info.Price;
-        name = _info.Name;
-        _nameText.text = _info.Name;
-        _priceText.text = _info.Price.ToString();
-        _sprite.sprite = sprite;
-        _damage = _info.Damage;
-        _attackSpeed = _info.AttackSpeed;
-        Id = _info.Id;
+        _price = (int) _skinView.Price;
+        name = _skinView.Name;
+        _nameText.text = _skinView.Name;
+        PriceText.text = _skinView.Price.ToString();
+        _sprite.sprite = spriteRenderer.sprite;
+        Id = _skinView.Id;
     }
 
     public void ShowInfoPanel()
@@ -50,8 +47,8 @@ public class SkinButtonView : MonoBehaviour
         _infoPanelView.gameObject.SetActive(true);
         SwitchButtonActive(IsUnlocked);
         _infoPanelView.SkinButton = this;
-        _infoPanelView.ItemNameText.text = _info.Name;
-        _infoPanelView.ItemDescriptionText.text = $"{_info.Description}\n \nУрон: {_damage}\nСкорость атаки: {_attackSpeed}\n";
+        _infoPanelView.ItemNameText.text = _skinView.Name;
+        _infoPanelView.ItemDescriptionText.text = $"{_skinView.Description}\n \nУрон: {_skinView.Damage}\nСкорость атаки: {_skinView.AttackSpeed}\n";
     }
 
     private void SwitchButtonActive(bool value)

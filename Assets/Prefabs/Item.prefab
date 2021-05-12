@@ -148,13 +148,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsUnlocked: 0
+  PriceText: {fileID: 5992002544675950627}
   IsLockedImage: {fileID: 4450271787404501452}
   _sprite: {fileID: 4691227669884094885}
-  _info: {fileID: 11400000, guid: 31bd6e33048170e4b8a71b71c3033477, type: 2}
+  _skinView: {fileID: 1392356654612333297, guid: 19c2fc994fcb01c46917a584fd96cebb,
+    type: 3}
   _nameText: {fileID: 1542595611192387854}
-  _priceText: {fileID: 5992002544675950627}
-  _damage: 0
-  _attackSpeed: 0
   _infoPanelView: {fileID: 0}
 --- !u!1 &7385449831020356154
 GameObject:

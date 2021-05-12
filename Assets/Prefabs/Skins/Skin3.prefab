@@ -127,8 +127,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cac4b61a6655034385a130f2ec3496a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SpriteRenderer: {fileID: 4460660415656683821}
   _projectileSpawnPoints:
   - {fileID: 3042946650324955786}
+  Price: 100
+  Name: Skin3
+  Description: 
+  Damage: 10
+  AttackSpeed: 10
+  Id: 2
 --- !u!61 &5158816835729199941
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "ce11171b7896eb3503",
         "name": "com.DefaultCompany.Istima",
-        "processId": 22406,
+        "processId": 30161,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -12,18 +12,42 @@
             "deviceId": "ce11171b7896eb3503",
             "name": "com.DefaultCompany.Istima",
             "processId": 2747,
-            "exited": false
+            "exited": true
         },
         {
             "deviceId": "ce11171b7896eb3503",
             "name": "com.DefaultCompany.Istima",
             "processId": 19098,
-            "exited": false
+            "exited": true
         },
         {
             "deviceId": "ce11171b7896eb3503",
             "name": "com.DefaultCompany.Istima",
             "processId": 22406,
+            "exited": true
+        },
+        {
+            "deviceId": "ce11171b7896eb3503",
+            "name": "com.DefaultCompany.Istima",
+            "processId": 6516,
+            "exited": true
+        },
+        {
+            "deviceId": "ce11171b7896eb3503",
+            "name": "com.DefaultCompany.Istima",
+            "processId": 14266,
+            "exited": false
+        },
+        {
+            "deviceId": "ce11171b7896eb3503",
+            "name": "com.DefaultCompany.Istima",
+            "processId": 25126,
+            "exited": false
+        },
+        {
+            "deviceId": "ce11171b7896eb3503",
+            "name": "com.DefaultCompany.Istima",
+            "processId": 30161,
             "exited": false
         }
     ],

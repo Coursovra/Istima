@@ -4,5 +4,5 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "PlayerSkinsScriptableObject", menuName = "ScriptableObjects/PlayerSkins")]
 public class PlayerModelScriptableObject : ScriptableObject
 {
-    [SerializeField] public List<SkinButtonView> PlayerSkins;
+    [SerializeField] public List<int> PlayerSkinsId;
 }

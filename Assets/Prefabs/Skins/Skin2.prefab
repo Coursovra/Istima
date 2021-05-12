@@ -154,9 +154,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cac4b61a6655034385a130f2ec3496a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SpriteRenderer: {fileID: 4939569425294211403}
   _projectileSpawnPoints:
   - {fileID: 3690669946344884398}
   - {fileID: 173205383277788627}
+  Price: 50
+  Name: Skin2
+  Description: Skin2Desc
+  Damage: 5
+  AttackSpeed: 5
+  Id: 1
 --- !u!1 &3690669946344884398
 GameObject:
   m_ObjectHideFlags: 0

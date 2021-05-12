@@ -1,10 +1,11 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerAttackController : MonoBehaviour
 {
     #region fields
-    public float Damage
+    public int Damage
     {
         get => _damage;
         set => _damage = value;
@@ -12,7 +13,7 @@ public class PlayerAttackController : MonoBehaviour
     public float AttackSpeed
     {
         get => _attackSpeed;
-        set => _attackSpeed = value;
+        set => _attackSpeed = (int) value;
     }
     public Vector3 ProjectileSize
     {
@@ -25,34 +26,41 @@ public class PlayerAttackController : MonoBehaviour
     }
     
     [SerializeField] private GameObject _projectilePrefab;
-    [SerializeField] private SelectedSkinScriptableObject _selectedSkinScriptableObject;
     [SerializeField] private Transform _projectileParentTransorm;
     [SerializeField] private ScoreView _scoreView;
+    [SerializeField] private PlayerSpriteController _playerSpriteController;
     private List<GameObject> _projectilePrefabs = new List<GameObject>();
-    private float _damage;
+    private int _damage;
     private float _attackSpeed;
     private float _lastAttackTimer;
     private GameObject[] _projectileSpawnPoints;
-    private PlayerSpriteController _playerSpriteController;
     #endregion
 
     private void Start()
     {
-        _playerSpriteController = GetComponentInChildren<PlayerSpriteController>();
-        var selectedSkin = _selectedSkinScriptableObject.SelectedSkin;
-        _damage = selectedSkin.Damage;
-        _attackSpeed = selectedSkin.AttackSpeed;
-         _projectileSpawnPoints = _playerSpriteController.GetPlayerSkinInstance().GetComponent<SkinView>()
-             .GetProjectileSpawnPoints();
-
-        print(_playerSpriteController.GetPlayerSkinInstance());
+        GetAttackStats();
+        ShopItemInfoPanelView.OnSelectButtonClicked += ShopItemInfoPanelViewOnSelectButtonClicked;
         ProjectileView.OnHit += ProjectileViewOnHit;
-        
+    }
+
+    private void ShopItemInfoPanelViewOnSelectButtonClicked(SkinButtonView obj)
+    {
+        GetAttackStats();
+    }
+
+    public void GetAttackStats()
+    {
+        var selectedSkin = _playerSpriteController.GetPlayerSkinInstance().GetComponent<SkinView>();
+        _damage = (int)Math.Round(selectedSkin.Damage);
+        _attackSpeed = selectedSkin.AttackSpeed;
+        _projectileSpawnPoints = _playerSpriteController.GetPlayerSkinInstance().GetComponent<SkinView>().GetProjectileSpawnPoints();
     }
 
     private void OnDestroy()
     {
         ProjectileView.OnHit -= ProjectileViewOnHit;
+        ShopItemInfoPanelView.OnSelectButtonClicked -= ShopItemInfoPanelViewOnSelectButtonClicked;
+
     }
 
     private void Update()
@@ -72,13 +80,13 @@ public class PlayerAttackController : MonoBehaviour
     {
         if(!PlayerController.IsPlaying) { return; }
         
-        if (!(_lastAttackTimer >= 1 / AttackSpeed)) return;
+        if (!(_lastAttackTimer >=  1 / AttackSpeed)) return;
         
         SpawnProjectile();
         _lastAttackTimer = 0;
     }
 
-    public void SpawnProjectile()
+    private void SpawnProjectile()
     {
         foreach (var spawnPoint in _projectileSpawnPoints)
         {
@@ -95,6 +103,6 @@ public class PlayerAttackController : MonoBehaviour
     private void ProjectileViewOnHit(ObstacleView obstacleView)
     {
         obstacleView.SetHitPoints(obstacleView.HitPoints - Damage);
-        _scoreView.CurrentScore += obstacleView.ScoreForHit;
+        _scoreView.CurrentScore += obstacleView.ScoreForHit; //todo: balance??
     }
 }

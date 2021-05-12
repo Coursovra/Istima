@@ -5,7 +5,8 @@ public class PlayerMovementController : MonoBehaviour
 {
     [SerializeField] private Slider _slider; 
     [SerializeField] private RectTransform _rectTransform; 
-    [SerializeField] private SelectedSkinScriptableObject _selectedSkinScriptableObject; 
+    [SerializeField] private PlayerSpriteController _playerSpriteController; 
+    //[SerializeField] private SelectedSkinScriptableObject _selectedSkinScriptableObject; 
     private readonly float _speed = .36f;
     Vector3 _worldDimensions;
 
@@ -15,7 +16,7 @@ public class PlayerMovementController : MonoBehaviour
         _slider.onValueChanged.AddListener(OnValueChanged);
         _slider.maxValue = _worldDimensions.x;
         _slider.minValue = -_worldDimensions.x;
-        var spriteRenderer = _selectedSkinScriptableObject.SelectedSkin.SkinGameObject.GetComponent<SpriteRenderer>();
+        var spriteRenderer = _playerSpriteController.GetPlayerSkinInstance().GetComponent<SpriteRenderer>();
         Vector2 spriteSize = spriteRenderer.sprite.rect.size;
         _rectTransform.sizeDelta = new Vector2(spriteSize.x,_worldDimensions.y);
     }
@@ -51,8 +52,8 @@ public class PlayerMovementController : MonoBehaviour
     {
         if (!PlayerController.IsPlaying) { return;}
 
-        print($"pos: {transform.position}, newValue: {value}, diff: {transform.position.x - value}");
+        //print($"pos: {transform.position}, newValue: {value}, diff: {transform.position.x - value}");
         //if (transform.position.x - value < 2f) { return;} 
-        transform.position = new Vector2(value, transform.position.y);
+        _playerSpriteController.GetPlayerSkinInstance().transform.position = new Vector2(value, transform.position.y);
     }
 }

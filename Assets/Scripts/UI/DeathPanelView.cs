@@ -10,14 +10,16 @@ public class DeathPanelView : MonoBehaviour
 
     private void OnEnable()
     {
-        PlayerPrefs.SetInt("Score", PlayerPrefs.GetInt("Score") + _scoreView.CurrentScore);
-        _scoreText.text = "Очков: " + PlayerPrefs.GetInt("Score");
-        var bestScore = PlayerPrefs.GetInt("BestScore");
+        //_scoreText.text = "Очков: " + PlayerPrefsController.GetScore();
+        var bestScore = PlayerPrefsController.GetBestScore();
         if (_scoreView.CurrentScore > bestScore)
         {
-            PlayerPrefs.SetInt("BestScore", _scoreView.CurrentScore);
+            PlayerPrefsController.SetBestScore(_scoreView.CurrentScore);
         }
-        _bestScoreText.text = "Рекорд: " + PlayerPrefs.GetInt("BestScore");
-        _currentScoreText.text = $"+{_scoreView.CurrentScore}";
+
+        _bestScoreText.text = "Рекорд: " + PlayerPrefsController.GetBestScore();
+        _scoreText.text = $"+{_scoreView.CurrentScore}";
+        _scoreView.Score += _scoreView.CurrentScore;
+
     }
 }
