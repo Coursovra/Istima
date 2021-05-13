@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// Управление атакой игрока
+/// </summary>
 public class PlayerAttackController : MonoBehaviour
 {
     #region fields
@@ -36,6 +38,11 @@ public class PlayerAttackController : MonoBehaviour
     private GameObject[] _projectileSpawnPoints;
     #endregion
 
+    /// <summary>
+    /// Получаем характеристика скина игрока при старте
+    /// Подпись на событие выбора нового скина из магазига.
+    /// Подпись на событие попадания выстрелом по препятствию.
+    /// </summary>
     private void Start()
     {
         GetAttackStats();
@@ -43,11 +50,18 @@ public class PlayerAttackController : MonoBehaviour
         ProjectileView.OnHit += ProjectileViewOnHit;
     }
 
+    /// <summary>
+    /// При ввыборе нового скина получаем его характеристики
+    /// </summary>
+    /// <param name="obj">Скин</param>
     private void ShopItemInfoPanelViewOnSelectButtonClicked(SkinButtonView obj)
     {
         GetAttackStats();
     }
 
+    /// <summary>
+    /// Получаем урон и скорость атаки скина, а также его позицию для спавна проджектайлов (выстрелов)
+    /// </summary>
     public void GetAttackStats()
     {
         var selectedSkin = _playerSpriteController.GetPlayerSkinInstance().GetComponent<SkinView>();
@@ -56,17 +70,22 @@ public class PlayerAttackController : MonoBehaviour
         _projectileSpawnPoints = _playerSpriteController.GetPlayerSkinInstance().GetComponent<SkinView>().GetProjectileSpawnPoints();
     }
 
+    /// <summary>
+    /// Отписка от событий при уничтожении объекта игрока
+    /// </summary>
     private void OnDestroy()
     {
         ProjectileView.OnHit -= ProjectileViewOnHit;
         ShopItemInfoPanelView.OnSelectButtonClicked -= ShopItemInfoPanelViewOnSelectButtonClicked;
-
     }
 
+    /// <summary>
+    /// Если игрок не играет, уничтожение всех выстрелов 
+    /// </summary>
     private void Update()
     {
         _lastAttackTimer += Time.deltaTime;
-        if (!PlayerController.IsPlaying)
+        if (!PlayerController.IsPlaying) //todo: можно убрать?
         {
             foreach (var projectileView in _projectilePrefabs)
             {
@@ -75,7 +94,10 @@ public class PlayerAttackController : MonoBehaviour
             _projectilePrefabs.Clear();
         }
     }
-
+    
+    /// <summary>
+    /// Если игрок играет (летит), происходит создание проджектайла (выстрела) с частотой, равной скорости атаки
+    /// </summary>
     private void FixedUpdate()
     {
         if(!PlayerController.IsPlaying) { return; }
@@ -86,6 +108,9 @@ public class PlayerAttackController : MonoBehaviour
         _lastAttackTimer = 0;
     }
 
+    /// <summary>
+    /// Создание выстрела на позиции, которую получаем из префаба скина
+    /// </summary>
     private void SpawnProjectile()
     {
         foreach (var spawnPoint in _projectileSpawnPoints)
@@ -100,6 +125,11 @@ public class PlayerAttackController : MonoBehaviour
         }
     }
     
+    /// <summary>
+    /// Обработка попадания по препятствию.
+    /// Нанесение урона, получение очков.
+    /// </summary>
+    /// <param name="obstacleView">Препятствие, по которому попал игрок</param>
     private void ProjectileViewOnHit(ObstacleView obstacleView)
     {
         obstacleView.SetHitPoints(obstacleView.HitPoints - Damage);

@@ -3,6 +3,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Окно с информацией о выбранном скине
+/// </summary>
 public class ShopItemInfoPanelView : MonoBehaviour
 {
     public SkinButtonView SkinButton { get; set; }
@@ -12,15 +15,20 @@ public class ShopItemInfoPanelView : MonoBehaviour
     [SerializeField] public Button BuyButton;
     [SerializeField] private TMP_Text _itemNameText;
     [SerializeField] private TMP_Text _itemDescriptionText;
-    //[SerializeField] private SelectedSkinScriptableObject _selectedSkinScriptableObject;
     public static event Action<SkinButtonView> OnBuyButtonClicked = delegate(SkinButtonView skinButton) { };
     public static event Action<SkinButtonView> OnSelectButtonClicked = delegate(SkinButtonView skinButton) { };
 
+    /// <summary>
+    /// Событие покупки скина, при нажатии на кнопку покупки в панели информации о скине
+    /// </summary>
     public void BuyButtonClicked()
     {
         OnBuyButtonClicked.Invoke(SkinButton);
     }
     
+    /// <summary>
+    /// Обработка выбора нового скина
+    /// </summary>
     public void SelectButtonClicked()
     {
         var playerSpriteView = FindObjectOfType<PlayerSpriteController>();

@@ -2,6 +2,9 @@ using System;
 using TMPro;
 using UnityEngine;
 
+/// <summary>
+/// Вью препятствия
+/// </summary>
 public class ObstacleView : MonoBehaviour
 {
     public float HitPoints { get; set; }
@@ -22,7 +25,11 @@ public class ObstacleView : MonoBehaviour
     {
         _boxCollider2D = gameObject.GetComponent<BoxCollider2D>();
     }
-
+    
+    /// <summary>
+    /// Установка цвета препятствия в зависимости от количества ХП
+    /// </summary>
+    /// <param name="hitPoints"> Количество ХП </param>
     public void SetHitPoints(float hitPoints)
     {
         HitPoints = hitPoints;
@@ -58,6 +65,9 @@ public class ObstacleView : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Отключение препятствия (тригера).
+    /// </summary>
     private void DisableObstacle()
     {
         GetComponent<Renderer>().enabled = false;
@@ -65,7 +75,11 @@ public class ObstacleView : MonoBehaviour
         Destroy(GetComponent<Rigidbody2D>());
         Destroy(transform.GetChild(0).gameObject);
     }
-
+    
+    /// <summary>
+    /// Обработка смерти игрока, при попадании его в триггер препятствия
+    /// </summary>
+    /// <param name="collider"></param>
     private void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider.CompareTag("Player"))
@@ -75,6 +89,9 @@ public class ObstacleView : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Уничтожение препятствий, которые не видит игрок (За экраном).
+    /// </summary>
     private void OnBecameInvisible()
     {
         if(Camera.main == null) { return; }

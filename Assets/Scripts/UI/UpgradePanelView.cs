@@ -2,6 +2,10 @@ using System;
 using TMPro;
 using UnityEngine;
 
+/// <summary>
+/// Улучшение характеристик игрока;
+/// Цены и значения улучшений формируются в зависимости от текщих характеристик игрока
+/// </summary>
 public class UpgradePanelView : MonoBehaviour //todo: balance???
 {
     [SerializeField] private TMP_Text _damageText;

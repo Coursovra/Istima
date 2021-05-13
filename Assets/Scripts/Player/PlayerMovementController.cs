@@ -1,15 +1,20 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Управление движением игрока
+/// </summary>
 public class PlayerMovementController : MonoBehaviour
 {
     [SerializeField] private Slider _slider; 
     [SerializeField] private RectTransform _rectTransform; 
     [SerializeField] private PlayerSpriteController _playerSpriteController; 
-    //[SerializeField] private SelectedSkinScriptableObject _selectedSkinScriptableObject; 
     private readonly float _speed = .36f;
     Vector3 _worldDimensions;
 
+    /// <summary>
+    /// Конфигурация слайдера, установка настроек в зависимости от размера экрана и размера спрайта игрока
+    /// </summary>
     private void Start()
     {
         _worldDimensions = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 1));
@@ -21,33 +26,18 @@ public class PlayerMovementController : MonoBehaviour
         _rectTransform.sizeDelta = new Vector2(spriteSize.x,_worldDimensions.y);
     }
     
+    /// <summary>
+    /// Отписка от события при уничтожении объекта игрока
+    /// </summary>
     void OnDestroy()
     {
         _slider.onValueChanged.RemoveListener(OnValueChanged);
     }
     
-    // void Update()
-    // {
-    //     if (PlayerController.IsPlaying)
-    //     {
-    //         //MovementHandler();
-    //     }
-    // }
-
-    private void MovementHandler()
-    {
-        if (Input.touches.Length > 0)
-        {
-            if (Input.touches[0].phase == TouchPhase.Moved)
-            {
-                var x = Input.touches[0].deltaPosition.x * _speed * Time.deltaTime;
-                //print(transform.position.x - x <= -_worldDimensions.x);
-                if(transform.position.x - x <= -_worldDimensions.x || transform.position.x + x >= _worldDimensions.x) { return; }
-                transform.Translate(new Vector3(x, 0, 0));
-            }
-        }
-    }
-
+    /// <summary>
+    /// Движение игрока по x-оси
+    /// </summary>
+    /// <param name="value">Значение слайдера</param>
     public void OnValueChanged(float value)
     {
         if (!PlayerController.IsPlaying) { return;}

@@ -2,6 +2,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Кнопка скина в магазине
+/// </summary>
 public class SkinButtonView : MonoBehaviour
 {
     public int Id { get; set; }
@@ -30,6 +33,9 @@ public class SkinButtonView : MonoBehaviour
         return _sprite;
     }
 
+    /// <summary>
+    /// Установка текста 
+    /// </summary>
     private void Start()
     {
         var spriteRenderer = _skinView.SpriteRenderer;
@@ -42,6 +48,9 @@ public class SkinButtonView : MonoBehaviour
         Id = _skinView.Id;
     }
 
+    /// <summary>
+    /// Отображение информации о скине
+    /// </summary>
     public void ShowInfoPanel()
     {
         _infoPanelView.gameObject.SetActive(true);
@@ -51,6 +60,10 @@ public class SkinButtonView : MonoBehaviour
         _infoPanelView.ItemDescriptionText.text = $"{_skinView.Description}\n \nУрон: {_skinView.Damage}\nСкорость атаки: {_skinView.AttackSpeed}\n";
     }
 
+    /// <summary>
+    /// Отображение кнопки покупки или выбора скина
+    /// </summary>
+    /// <param name="value"></param>
     private void SwitchButtonActive(bool value)
     {
         _infoPanelView.BuyButton.gameObject.SetActive(!value);
