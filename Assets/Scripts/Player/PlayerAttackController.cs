@@ -102,7 +102,7 @@ public class PlayerAttackController : MonoBehaviour
     
     private void ProjectileViewOnHit(ObstacleView obstacleView)
     {
-        obstacleView.SetHitPoints(obstacleView.HitPoints - Damage);
-        _scoreView.CurrentScore += obstacleView.ScoreForHit; //todo: balance??
+        obstacleView.SetHitPoints((int) (obstacleView.HitPoints - Damage));
+        _scoreView.CurrentScore += (int) Math.Round(obstacleView.ScoreForHit * _damage * .1f, MidpointRounding.AwayFromZero); //todo: balance??
     }
 }

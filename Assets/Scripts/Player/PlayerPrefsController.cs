@@ -47,6 +47,11 @@ public static class PlayerPrefsController
     {
         PlayerPrefs.SetFloat("UpgradeAttackSpeedValue", value);
     }
+    
+    public static void SetFpsToggleStatus(int value)
+    {
+        PlayerPrefs.SetInt("SettingsFPSToggle", value);
+    }
 
     #endregion
     
@@ -95,6 +100,11 @@ public static class PlayerPrefsController
     public static float GetUpgradeAttackSpeedValue()
     {
         return PlayerPrefs.GetFloat("UpgradeAttackSpeedValue");
+    }
+
+    public static int GetFpsToggleStatus()
+    {
+        return PlayerPrefs.GetInt("SettingsFPSToggle");
     }
 
     #endregion

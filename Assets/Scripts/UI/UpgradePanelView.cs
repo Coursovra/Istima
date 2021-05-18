@@ -8,32 +8,20 @@ public class UpgradePanelView : MonoBehaviour //todo: balance???
     [SerializeField] private TMP_Text _attackSpeedText;
     [SerializeField] private PlayerSpriteController _playerSpriteController;
     [SerializeField] private ScoreView _scoreView;
-    private float _damagePriceModifier = 1.3f;
-    private float _attackSpeedPriceModifier = 2f;
-    private float _damageUpgradeModifier = .3f;
-    private float _attackSpeedUpgradeModifier = .1f;
+    private float _damagePriceModifier = 2.5f;
+    private float _attackSpeedPriceModifier = 50f;
+    private float _damageUpgradeModifier = .1f;
+    private float _attackSpeedUpgradeModifier = .07f;
     private SkinView _selectedSkin;
 
-    private int DamagePrice
-    {
-        get => (int)Math.Round(_selectedSkin.Damage * _damagePriceModifier);
-    }
+    private int DamagePrice => (int)Math.Round(_selectedSkin.Damage * _damagePriceModifier, MidpointRounding.AwayFromZero);
 
-    private int AttackSpeedPrice
-    {
-        get => (int)Math.Round(_selectedSkin.AttackSpeed * _attackSpeedPriceModifier);
-    }
+    private int AttackSpeedPrice => (int)Math.Round(_selectedSkin.AttackSpeed * _attackSpeedPriceModifier, MidpointRounding.AwayFromZero);
 
-    private float DamageUpgrade
-    {
-        get => (float) Math.Round(_selectedSkin.Damage * _damageUpgradeModifier, 1);
-    }
+    private float DamageUpgrade => (float) Math.Round(_selectedSkin.Damage * _damageUpgradeModifier, 1);
 
-    private float AttackSpeedUpgrade
-    {
-        get => (float)Math.Round(_selectedSkin.AttackSpeed * _attackSpeedUpgradeModifier, 1);
-    }
-    
+    private float AttackSpeedUpgrade => (float)Math.Round(_selectedSkin.AttackSpeed * _attackSpeedUpgradeModifier, 1);
+
     private void Start()
     {
         ShopItemInfoPanelView.OnSelectButtonClicked += ShopItemInfoPanelViewOnSelectButtonClicked;

@@ -23,7 +23,7 @@ public class ObstacleView : MonoBehaviour
         _boxCollider2D = gameObject.GetComponent<BoxCollider2D>();
     }
 
-    public void SetHitPoints(float hitPoints)
+    public void SetHitPoints(int hitPoints)
     {
         HitPoints = hitPoints;
         _hpText.text = hitPoints.ToString();
@@ -74,17 +74,4 @@ public class ObstacleView : MonoBehaviour
             OnPlayerDeath?.Invoke();
         }
     }
-
-    private void OnBecameInvisible()
-    {
-        if(Camera.main == null) { return; }
-        float _distance = -8.0f;
-        var frustumHeight = 2.0f * _distance * Mathf.Tan(Camera.main.fieldOfView * 0.5f * Mathf.Deg2Rad);
-
-        if (transform.position.y < frustumHeight)
-        {
-            Destroy(gameObject);
-        }
-    }
-    
 }
