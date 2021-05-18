@@ -4,6 +4,9 @@ public class ShopButtonView : MonoBehaviour
 {
     [SerializeField] private UIController _uiController;
 
+    /// <summary>
+    /// Открытие магазина
+    /// </summary>
     public void ShowShop()
     {
         _uiController.ShopPanel.SetActive(true);

@@ -3,18 +3,24 @@ using UnityEngine;
 
 public class ObstacleController : MonoBehaviour, IMovement, IObstaclesSpawn, IDifficultHandler
 {
+	/// <summary>
+	/// Класс для управлением препятствий
+	/// </summary>
+	public class ObstacleController : MonoBehaviour, IMovement, IObstaclesSpawn, IDifficultHandler
+	{
+	#region Fields
     [SerializeField] private ObstacleParentView _obstaclesParentView;
     [SerializeField] private UIController _uiController;
     [SerializeField] private PlayerAttackController _playerAttackController;
     public GameObject ObstaclePrefab;
-    public float Speed { get; set; } = 4.5f;
     public float ScreenPercentage { get; set; } = .0055f; //todo: (pomoika) => optimize for diff screens
     public int ObstacleHitPoints { get; set; }
     public float SpawnRate { get; set; } = 4f;
+    public float Speed { get; set; };
     public float LastSpawnTime { get; set; }
     public float ObstaclesQuantity { get; set; } = 3;
     public List<GameObject> Obstacles { get; set; }
-    
+  
     private float _gridRectHeight = 3f;
     public List<ObstacleParentView> ObstaclesParents = new List<ObstacleParentView>();
     private bool _isTriggered;
@@ -26,6 +32,12 @@ public class ObstacleController : MonoBehaviour, IMovement, IObstaclesSpawn, IDi
     private float _playerDps;
     private int _waveCounter;
 
+	#endregion
+
+    /// <summary>
+    /// Отключение переменной при начале игры, которая позволяет обрабатывать смерть игрока.
+    /// Нужна для того чтобы избежать двойных вызовов функций с обработкой смерти игрока
+    /// </summary>
     private void OnEnable()
     {
         _isTriggered = false;
@@ -42,6 +54,11 @@ public class ObstacleController : MonoBehaviour, IMovement, IObstaclesSpawn, IDi
         _obstacleMinimumHp = (int) (_playerDps * _obstacleMinimumHpModifier);
         _obstacleMaximumHp = (int) (_playerDps * _obstacleMaximumHpModifier);
     }
+
+
+    /// <summary>
+    /// Вычисление точки спавна препятствий
+    /// </summary>
     private void Start()
     {
         DifficultReset();
@@ -51,6 +68,9 @@ public class ObstacleController : MonoBehaviour, IMovement, IObstaclesSpawn, IDi
         Create();
     }
     
+    /// <summary>
+    /// Управление сложностью, создание препятствий и их движние
+    /// </summary>
     private void Update()
     {
         if (Time.time > 1 / Time.time + SpawnRate + LastSpawnTime)
@@ -63,6 +83,9 @@ public class ObstacleController : MonoBehaviour, IMovement, IObstaclesSpawn, IDi
         DifficultHandler();
     }
 
+    /// <summary>
+    /// Создание препятствий, подписка каждого препятствия на обработку смерти игрока
+    /// </summary>
     public void Create()
     {
         _waveCounter++;
@@ -79,6 +102,10 @@ public class ObstacleController : MonoBehaviour, IMovement, IObstaclesSpawn, IDi
         LastSpawnTime = Time.time;
     }
 
+    /// <summary>
+    /// Управление сложностью игры.
+    /// Количество препятствий, их хп, скорость движения
+    /// </summary>
     public void DifficultHandler() //todo: balance, max 6 wave
     {
         #region HP
@@ -119,6 +146,9 @@ public class ObstacleController : MonoBehaviour, IMovement, IObstaclesSpawn, IDi
         //todo: process hp, amount, grid.cell size... (formula?)
     }
     
+    /// <summary>
+    /// Движение каждого препятствия вниз по y-оси
+    /// </summary>
     public void ProcessMovement()
     {
         foreach (var obstaclesParent in ObstaclesParents)
@@ -132,6 +162,9 @@ public class ObstacleController : MonoBehaviour, IMovement, IObstaclesSpawn, IDi
         // }
     }
 
+    /// <summary>
+    /// Уничтожение всех препятствий, отписка от события, очищение листов
+    /// </summary>
     private void DestroyObstacles()
     {
         _isTriggered = false;
@@ -144,12 +177,14 @@ public class ObstacleController : MonoBehaviour, IMovement, IObstaclesSpawn, IDi
         ObstaclesParents.Clear();
     }
     
+    /// <summary>
+    /// Обработка смерти игрока
+    /// </summary>
     private void ObstacleViewOnPlayerDeath()
     {
         if(_isTriggered) { return; }
         DestroyObstacles();
         _isTriggered = true;
         _uiController.ToggleUi(false);
-        gameObject.SetActive(false);
     }
 }

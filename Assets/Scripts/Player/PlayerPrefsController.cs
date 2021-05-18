@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Класс для управления PlayerPrefs
+/// </summary>
 public static class PlayerPrefsController
 {
     private const string MySkinsStringPattern = "{Id}-{Damage}-{AttackSpeed};";

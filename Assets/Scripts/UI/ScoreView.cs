@@ -1,8 +1,14 @@
 using TMPro;
 using UnityEngine;
 
+/// <summary>
+/// Счет игрока
+/// </summary>
 public class ScoreView : MonoBehaviour
 {
+    /// <summary>
+    /// Общий счет
+    /// </summary>
     public int Score
     {
         set
@@ -19,6 +25,9 @@ public class ScoreView : MonoBehaviour
         } 
     }
     
+    /// <summary>
+    /// Текущий счет в игре
+    /// </summary>
     public int CurrentScore
     {
         set

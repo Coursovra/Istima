@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Вью скина с его характеристиками
+/// </summary>
 public class SkinView : MonoBehaviour
 {
     public SpriteRenderer SpriteRenderer;

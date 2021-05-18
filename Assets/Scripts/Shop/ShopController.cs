@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Управление магазином скинов
+/// </summary>
 public class ShopController : MonoBehaviour
 {
     [SerializeField] private List<string> _mySkins;
@@ -9,6 +12,11 @@ public class ShopController : MonoBehaviour
     [SerializeField] private SkinButtonView[] _shopItems;
     private ShopItemInfoPanelView _infoPanelView;
     
+    /// <summary>
+    /// Заполнение массива всеми скинами из магазина;
+    /// Подписка события на покупку скина;
+    /// Получение купленных скинов игрока.
+    /// </summary>
     void Start()
     {
         _infoPanelView = FindObjectOfType<ShopItemInfoPanelView>();
@@ -25,11 +33,18 @@ public class ShopController : MonoBehaviour
         return _shopItems;
     }
 
-    private void OnDestroy()
+    /// <summary>
+    /// Отписка от события при уничтожении магазина
+    /// </summary>
+    private void OnDestroy() //todo: OnInvisible?
     {
         ShopItemInfoPanelView.OnBuyButtonClicked -= InfoPanelViewOnBuyButtonClicked;
     }
 
+    /// <summary>
+    /// Какие скины из магазины куплены у игрока.
+    /// Получение информации из PlayerPrefs
+    /// </summary>
     private void GetBoughtSkins()
     {
         foreach (var shopItem in _shopItems)
@@ -52,6 +67,10 @@ public class ShopController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Получение скинов игрока, их характеристик
+    /// </summary>
+    /// <returns></returns>
     private string GetMySkins()
     {
         var mySkins = PlayerPrefsController.GetMySkins();
@@ -72,12 +91,21 @@ public class ShopController : MonoBehaviour
         return mySkinsString;
     }
 
+    /// <summary>
+    /// Отображение информации о скине при нажатии на него
+    /// </summary>
+    /// <param name="skinView">Скин, на который нажал игрок</param>
     private void InfoPanelViewOnBuyButtonClicked(SkinButtonView skinView)
     {
         if (_scoreView.Score < skinView.GetPrice() || skinView.IsUnlocked) { return; }
         BuySkin(skinView);
     }
 
+    /// <summary>
+    /// Покупка скина.
+    /// Запись в PlayerPrefs
+    /// </summary>
+    /// <param name="skinView"></param>
     private void BuySkin(SkinButtonView skinView)
     {
         _scoreView.Score -= skinView.GetPrice();
@@ -94,6 +122,9 @@ public class ShopController : MonoBehaviour
         _infoPanelView.SelectButton.gameObject.SetActive(true);
     }
 
+    /// <summary>
+    /// Обновление счета при заходе в магазин
+    /// </summary>
     private void OnEnable()
     {
         _scoreView.Score = PlayerPrefsController.GetScore();

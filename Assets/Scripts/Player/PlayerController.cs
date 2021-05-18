@@ -12,7 +12,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private ScoreView _scoreView;
     private readonly Vector2 _startPosition = new Vector2(0, -8);
 
-    
+    /// <summary>
+    /// Если это первый запуск игры, пишем в PlayerPrefs характеристики стандартного скина
+    /// Иначе получаем из PlayerPrefs характеристики текущего скина
+    /// </summary>
     private void Start()
     {
         if (PlayerPrefsController.GetMySkins().Length == 0)
@@ -39,18 +42,24 @@ public class PlayerController : MonoBehaviour
         _upgradePanelView.UpdateText();
     }
 
+    /// <summary>
+    /// Запись в PlayerPrefs
+    /// </summary>
     private void WriteDefault()
     {
         var selectedSkinView = _playerSpriteController.GetSelectedSkinView();
         PlayerPrefsController.SetScore(0);
         PlayerPrefsController.SetMySkins(
             $"{selectedSkinView.Id}-{selectedSkinView.Damage}-{selectedSkinView.AttackSpeed}");
-        PlayerPrefsController.SetUpgradeDamageCost(1);
-        PlayerPrefsController.SetUpgradeDamageValue(1);
-        PlayerPrefsController.SetUpgradeAttackSpeedCost(1);
-        PlayerPrefsController.SetUpgradeAttackSpeedValue(1);
+        // PlayerPrefsController.SetUpgradeDamageCost(1);
+        // PlayerPrefsController.SetUpgradeDamageValue(1);
+        // PlayerPrefsController.SetUpgradeAttackSpeedCost(1);
+        // PlayerPrefsController.SetUpgradeAttackSpeedValue(1);
     }
 
+    /// <summary>
+    /// При нажатии на игрока начинается игра
+    /// </summary>
     private void OnMouseDown()
     {
         if (IsPlaying) return;
@@ -69,9 +78,12 @@ public class PlayerController : MonoBehaviour
         _playerAttackController.GetAttackStats();
     }
 
-    private void ResetPosition()
+    /// <summary>
+    /// Установка игрока в стартовую точку
+    /// </summary>
+    public void ResetPosition()
     {
         transform.position = _startPosition;
     }
-    
+
 }
