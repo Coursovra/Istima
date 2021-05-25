@@ -6,12 +6,12 @@ public class PlayerController : MonoBehaviour
     public static bool IsPlaying;
     [SerializeField] private UIController _uiController;
     [SerializeField] private ObstacleController _obstacleController;
+    [SerializeField] private BoostsController _boostsController;
     [SerializeField] private PlayerSpriteController _playerSpriteController;
     [SerializeField] private PlayerAttackController _playerAttackController;
     [SerializeField] private UpgradePanelView _upgradePanelView;
     [SerializeField] private ScoreView _scoreView;
     private readonly Vector2 _startPosition = new Vector2(0, -8);
-
     /// <summary>
     /// Если это первый запуск игры, пишем в PlayerPrefs характеристики стандартного скина
     /// Иначе получаем из PlayerPrefs характеристики текущего скина
@@ -72,6 +72,7 @@ public class PlayerController : MonoBehaviour
         ResetPosition();
         _uiController.ToggleUi(true);
         _obstacleController.gameObject.SetActive(true);
+        _boostsController.gameObject.SetActive(true);
 
         IsPlaying = true;
         _scoreView.CurrentScore = 0;
@@ -86,4 +87,11 @@ public class PlayerController : MonoBehaviour
         transform.position = _startPosition;
     }
 
+    // private void OnTriggerEnter2D(Collider2D other)
+    // {
+    //     if (other.TryGetComponent<IBoost>(out var boost))
+    //     {
+    //         _playerAttackController.ActiveBoosts.Add(boost);
+    //     }
+    // }
 }

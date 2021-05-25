@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 /// <summary>
 /// Управление атакой игрока
 /// </summary>
@@ -12,6 +14,7 @@ public class PlayerAttackController : MonoBehaviour
         get => _damage;
         set => _damage = value;
     }
+
     public float AttackSpeed
     {
         get => _attackSpeed;
@@ -27,6 +30,7 @@ public class PlayerAttackController : MonoBehaviour
         set => _projectilePrefab.GetComponent<ProjectileView>().Speed = value;
     }
     
+    [SerializeField] private List<GameObject> _projectileSpawnPoints;
     [SerializeField] private GameObject _projectilePrefab;
     [SerializeField] private Transform _projectileParentTransorm;
     [SerializeField] private ScoreView _scoreView;
@@ -34,9 +38,20 @@ public class PlayerAttackController : MonoBehaviour
     private List<GameObject> _projectilePrefabs = new List<GameObject>();
     private int _damage;
     private float _attackSpeed;
+    private int _damageBoost;
+    private float _attackSpeedBoost;
     private float _lastAttackTimer;
-    private GameObject[] _projectileSpawnPoints;
+    private SkinView _selectedSkin;
     #endregion
+    
+    public void SetDamageBoost(float damageBoost)
+    {
+        _damageBoost += (int) (_damage * damageBoost);
+    }
+    public void SetAttackSpeedBoost(float attackSpeedBoost)
+    {
+        _attackSpeedBoost += _attackSpeed * attackSpeedBoost;
+    }
 
     /// <summary>
     /// Получаем характеристика скина игрока при старте
@@ -48,6 +63,11 @@ public class PlayerAttackController : MonoBehaviour
         GetAttackStats();
         ShopItemInfoPanelView.OnSelectButtonClicked += ShopItemInfoPanelViewOnSelectButtonClicked;
         ProjectileView.OnHit += ProjectileViewOnHit;
+    }
+
+    public SkinView GetSelectedSkin()
+    {
+        return _selectedSkin;
     }
 
     /// <summary>
@@ -64,10 +84,19 @@ public class PlayerAttackController : MonoBehaviour
     /// </summary>
     public void GetAttackStats()
     {
-        var selectedSkin = _playerSpriteController.GetPlayerSkinInstance().GetComponent<SkinView>();
-        _damage = (int)Math.Round(selectedSkin.Damage);
-        _attackSpeed = selectedSkin.AttackSpeed;
+        _selectedSkin = _playerSpriteController.GetPlayerSkinInstance().GetComponent<SkinView>();
+        _damage = (int)Math.Round(_selectedSkin.Damage);
+        _attackSpeed = _selectedSkin.AttackSpeed;
         _projectileSpawnPoints = _playerSpriteController.GetPlayerSkinInstance().GetComponent<SkinView>().GetProjectileSpawnPoints();
+    }
+
+    public List<GameObject> GetSpawnPoints()
+    {
+        return _projectileSpawnPoints;
+    }
+    public List<GameObject> GetAdditionalSpawnPoints()
+    {
+        return _playerSpriteController.GetPlayerSkinInstance().GetComponent<SkinView>().GetAdditionalProjectileSpawnPoints();;
     }
 
     /// <summary>
@@ -84,6 +113,8 @@ public class PlayerAttackController : MonoBehaviour
     /// </summary>
     private void Update()
     {
+        //print(_attackSpeedBoost);
+
         _lastAttackTimer += Time.deltaTime;
         if (!PlayerController.IsPlaying) //todo: можно убрать?
         {
@@ -102,7 +133,7 @@ public class PlayerAttackController : MonoBehaviour
     {
         if(!PlayerController.IsPlaying) { return; }
         
-        if (!(_lastAttackTimer >=  1 / AttackSpeed)) return;
+        if (!(_lastAttackTimer >=  1 / (AttackSpeed + _attackSpeedBoost))) return;
         
         SpawnProjectile();
         _lastAttackTimer = 0;
@@ -118,7 +149,7 @@ public class PlayerAttackController : MonoBehaviour
             Vector2 position = new Vector2(spawnPoint.transform.position.x,
                 _playerSpriteController.transform.position.y);
             
-            var projectileInstance = Instantiate(_projectilePrefab, position, Quaternion.identity,
+            var projectileInstance = Instantiate(_projectilePrefab, position, spawnPoint.transform.localRotation,
                 _projectileParentTransorm);
             
             _projectilePrefabs.Add(projectileInstance);
@@ -132,7 +163,10 @@ public class PlayerAttackController : MonoBehaviour
     /// <param name="obstacleView">Препятствие, по которому попал игрок</param>
     private void ProjectileViewOnHit(ObstacleView obstacleView)
     {
-        obstacleView.SetHitPoints((int) (obstacleView.HitPoints - Damage));
-        _scoreView.CurrentScore += (int) Math.Round(obstacleView.ScoreForHit * _damage * .1f, MidpointRounding.AwayFromZero); //todo: balance??
+        obstacleView.SetHitPoints((int) (obstacleView.HitPoints - (Damage + _damageBoost)));
+        _scoreView.CurrentScore += (int) Math.Round(
+            obstacleView.ScoreForHit * (Damage + _damageBoost) * .1f, 
+            MidpointRounding.AwayFromZero); 
+        //todo: balance??
     }
 }

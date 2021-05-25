@@ -8,19 +8,19 @@ using UnityEngine;
 /// </summary>
 public class UpgradePanelView : MonoBehaviour //todo: balance???
 {
-    [SerializeField] private TMP_Text _damageText;
-    [SerializeField] private TMP_Text _attackSpeedText;
+    [SerializeField] private TMP_Text _damageTextt;
+    [SerializeField] private TMP_Text _attackSpeedTextt;
     [SerializeField] private PlayerSpriteController _playerSpriteController;
     [SerializeField] private ScoreView _scoreView;
-    private float _damagePriceModifier = 2.5f;
-    private float _attackSpeedPriceModifier = 50f;
+    private float _damagePriceModifier = 10f;
+    private float _attackSpeedPriceModifier = 200f;
     private float _damageUpgradeModifier = .1f;
     private float _attackSpeedUpgradeModifier = .07f;
     private SkinView _selectedSkin;
 
-    private int DamagePrice => (int)Math.Round(_selectedSkin.Damage * _damagePriceModifier, MidpointRounding.AwayFromZero);
+    private int DamagePrice => (int) Math.Round(_selectedSkin.Damage + _selectedSkin.Damage * _damagePriceModifier, MidpointRounding.AwayFromZero);
 
-    private int AttackSpeedPrice => (int)Math.Round(_selectedSkin.AttackSpeed * _attackSpeedPriceModifier, MidpointRounding.AwayFromZero);
+    private int AttackSpeedPrice => (int)Math.Round(_selectedSkin.AttackSpeed + _selectedSkin.AttackSpeed * _attackSpeedPriceModifier, MidpointRounding.AwayFromZero);
 
     private float DamageUpgrade => (float) Math.Round(_selectedSkin.Damage * _damageUpgradeModifier, 1);
 
@@ -46,8 +46,8 @@ public class UpgradePanelView : MonoBehaviour //todo: balance???
     
     public void UpdateText()
     {
-        _damageText.text = $"Урон:\n {_selectedSkin.Damage} (+{DamageUpgrade})\nОчков: {DamagePrice}";
-        _attackSpeedText.text = $"Скорость атаки: {_selectedSkin.AttackSpeed} (+{AttackSpeedUpgrade})\nОчков: {AttackSpeedPrice}";
+        _damageTextt.text = $"Урон:\n {_selectedSkin.Damage} (+{DamageUpgrade})\nОчков: {DamagePrice}";
+        _attackSpeedTextt.text = $"Скорость атаки: {_selectedSkin.AttackSpeed} (+{AttackSpeedUpgrade})\nОчков: {AttackSpeedPrice}";
     }
     
     public void UpgradeDamage()

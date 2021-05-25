@@ -1101,8 +1101,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2648079202b5a1c49a562a556f154121, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damageText: {fileID: 1089184249}
-  _attackSpeedText: {fileID: 1939435461}
+  _damageTextt: {fileID: 1089184249}
+  _attackSpeedTextt: {fileID: 1939435461}
   _playerSpriteController: {fileID: 2072644257}
   _scoreView: {fileID: 1231913302}
 --- !u!1 &312830323
@@ -2775,6 +2775,57 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 836969289}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &842033874
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 842033876}
+  - component: {fileID: 842033875}
+  m_Layer: 0
+  m_Name: BoostController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &842033875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 842033874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d60c003bf66a1c4ebf33df348598659, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _availableBoosts:
+  - {fileID: 2502986903043536519, guid: 26cc83cdbb049314c96c8ed629bf4900, type: 3}
+  - {fileID: 2502986903043536519, guid: 47b0ae26e443afd4d93be1ba96fc62a5, type: 3}
+  - {fileID: 2502986903043536519, guid: 41c9d72e251cdb246acacebb8b05177a, type: 3}
+  _boostIcon: {fileID: 1643477033}
+  _boostStatus: {fileID: 2002075149}
+  _obstacleController: {fileID: 1503381970}
+  _playerAttackController: {fileID: 2072644251}
+--- !u!4 &842033876
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 842033874}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.42206863, y: -7.528966, z: -0.0030841827}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &878858302
 GameObject:
   m_ObjectHideFlags: 0
@@ -2874,7 +2925,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!224 &878858307
 RectTransform:
@@ -5105,6 +5156,7 @@ MonoBehaviour:
   _playerAttackController: {fileID: 2072644251}
   ObstaclePrefab: {fileID: 6162820926164869027, guid: 166053673f590f641b0f18e83ca48a9b,
     type: 3}
+  ObstaclesParents: []
 --- !u!4 &1503381971
 Transform:
   m_ObjectHideFlags: 0
@@ -5606,6 +5658,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1612972536}
   m_CullTransparentMesh: 1
+--- !u!114 &1643477033 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5632598219699231029, guid: f8db928718b4e7e41a65cf27fe1e5a76,
+    type: 3}
+  m_PrefabInstance: {fileID: 1401543555079807598}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1697154809
 GameObject:
   m_ObjectHideFlags: 0
@@ -6635,6 +6699,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1939435458}
   m_CullTransparentMesh: 1
+--- !u!114 &2002075149 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1334438118461478301, guid: f8db928718b4e7e41a65cf27fe1e5a76,
+    type: 3}
+  m_PrefabInstance: {fileID: 1401543555079807598}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2003727086
 GameObject:
   m_ObjectHideFlags: 0
@@ -7067,15 +7143,49 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 837840214, guid: f8db928718b4e7e41a65cf27fe1e5a76, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 837840214, guid: f8db928718b4e7e41a65cf27fe1e5a76, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225330466, guid: f8db928718b4e7e41a65cf27fe1e5a76, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225330466, guid: f8db928718b4e7e41a65cf27fe1e5a76, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225330466, guid: f8db928718b4e7e41a65cf27fe1e5a76, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1609103397, guid: f8db928718b4e7e41a65cf27fe1e5a76, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2072644257, guid: f8db928718b4e7e41a65cf27fe1e5a76, type: 3}
       propertyPath: _shopController
       value: 
       objectReference: {fileID: 199036820}
     - target: {fileID: 1401543556833683662, guid: f8db928718b4e7e41a65cf27fe1e5a76,
         type: 3}
+      propertyPath: _boostIcon
+      value: 
+      objectReference: {fileID: 1643477033}
+    - target: {fileID: 1401543556833683662, guid: f8db928718b4e7e41a65cf27fe1e5a76,
+        type: 3}
       propertyPath: _scoreView
       value: 
       objectReference: {fileID: 1231913302}
+    - target: {fileID: 1401543556833683662, guid: f8db928718b4e7e41a65cf27fe1e5a76,
+        type: 3}
+      propertyPath: _boostStatus
+      value: 
+      objectReference: {fileID: 2002075149}
     - target: {fileID: 1401543556833683662, guid: f8db928718b4e7e41a65cf27fe1e5a76,
         type: 3}
       propertyPath: _playerSpriteController
@@ -7158,6 +7268,11 @@ PrefabInstance:
       objectReference: {fileID: 299584107}
     - target: {fileID: 1401543556833683699, guid: f8db928718b4e7e41a65cf27fe1e5a76,
         type: 3}
+      propertyPath: _boostsController
+      value: 
+      objectReference: {fileID: 842033875}
+    - target: {fileID: 1401543556833683699, guid: f8db928718b4e7e41a65cf27fe1e5a76,
+        type: 3}
       propertyPath: _upgradePanelView
       value: 
       objectReference: {fileID: 305221966}
@@ -7180,6 +7295,41 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 2250055452113810078, guid: f8db928718b4e7e41a65cf27fe1e5a76,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4171089214076242815, guid: f8db928718b4e7e41a65cf27fe1e5a76,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -1.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4542072483209647232, guid: f8db928718b4e7e41a65cf27fe1e5a76,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4615204076477915405, guid: f8db928718b4e7e41a65cf27fe1e5a76,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5437464643514619431, guid: f8db928718b4e7e41a65cf27fe1e5a76,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5466946148876114592, guid: f8db928718b4e7e41a65cf27fe1e5a76,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6493522480813957146, guid: f8db928718b4e7e41a65cf27fe1e5a76,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f8db928718b4e7e41a65cf27fe1e5a76, type: 3}

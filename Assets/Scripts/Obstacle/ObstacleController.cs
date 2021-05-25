@@ -1,8 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObstacleController : MonoBehaviour, IMovement, IObstaclesSpawn, IDifficultHandler
-{
 	/// <summary>
 	/// Класс для управлением препятствий
 	/// </summary>
@@ -13,10 +11,9 @@ public class ObstacleController : MonoBehaviour, IMovement, IObstaclesSpawn, IDi
     [SerializeField] private UIController _uiController;
     [SerializeField] private PlayerAttackController _playerAttackController;
     public GameObject ObstaclePrefab;
-    public float ScreenPercentage { get; set; } = .0055f; //todo: (pomoika) => optimize for diff screens
     public int ObstacleHitPoints { get; set; }
     public float SpawnRate { get; set; } = 4f;
-    public float Speed { get; set; };
+    public float Speed { get; set; }
     public float LastSpawnTime { get; set; }
     public float ObstaclesQuantity { get; set; } = 3;
     public List<GameObject> Obstacles { get; set; }
@@ -31,9 +28,16 @@ public class ObstacleController : MonoBehaviour, IMovement, IObstaclesSpawn, IDi
     private float _obstacleMaximumHpModifier;
     private float _playerDps;
     private int _waveCounter;
+    private float _minimumRandomModifier = .1f;
+    private float _maximumRandomModifier = 1f;
+    bool _modified = false;
 
-	#endregion
+    #endregion
 
+    public int GetCurrentWave()
+    {
+        return _waveCounter;
+    }
     /// <summary>
     /// Отключение переменной при начале игры, которая позволяет обрабатывать смерть игрока.
     /// Нужна для того чтобы избежать двойных вызовов функций с обработкой смерти игрока
@@ -47,6 +51,7 @@ public class ObstacleController : MonoBehaviour, IMovement, IObstaclesSpawn, IDi
     private void DifficultReset()
     {
         _waveCounter = 1;
+        SpawnRate = 4;
         _playerAttackController.GetAttackStats();
         _playerDps = _playerAttackController.Damage * _playerAttackController.AttackSpeed;
         _obstacleMinimumHpModifier = 1f;
@@ -66,6 +71,7 @@ public class ObstacleController : MonoBehaviour, IMovement, IObstaclesSpawn, IDi
         Obstacles = new List<GameObject>();
         transform.position += new Vector3(0, frustumHeight, 0);
         Create();
+        ObstacleView.OnPlayerDeath += ObstacleViewOnPlayerDeath;
     }
     
     /// <summary>
@@ -96,7 +102,6 @@ public class ObstacleController : MonoBehaviour, IMovement, IObstaclesSpawn, IDi
             var newObstacle = Instantiate(ObstaclePrefab, ObstaclesParents[ObstaclesParents.Count-1].transform);
             var obstacleView = newObstacle.GetComponent<ObstacleView>();
             obstacleView.SetHitPoints(ObstacleHitPoints);
-            obstacleView.OnPlayerDeath += ObstacleViewOnPlayerDeath;
             Obstacles.Add(newObstacle);
         }
         LastSpawnTime = Time.time;
@@ -111,37 +116,47 @@ public class ObstacleController : MonoBehaviour, IMovement, IObstaclesSpawn, IDi
         #region HP
         _obstacleMinimumHpModifier = Mathf.Clamp(_waveCounter, 1, 10);
         _obstacleMaximumHpModifier = Mathf.Clamp(_waveCounter, 4, 20);
-        _obstacleMinimumHp = (int) (_playerDps * _obstacleMinimumHpModifier);
-        _obstacleMaximumHp = (int) (_playerDps * _obstacleMaximumHpModifier);
+        _obstacleMinimumHp = (int) (_playerDps * _obstacleMinimumHpModifier * Random.Range(_minimumRandomModifier, _maximumRandomModifier));
+        _obstacleMaximumHp = (int) (_playerDps * _obstacleMaximumHpModifier * Random.Range(_minimumRandomModifier, _maximumRandomModifier));
         #endregion
 
-        #region Quantity
+        #region Quantity //todo: увеличить размер камеры, грид, уменьшить cellSize?
 
         //ObstaclesQuantity = Mathf.Clamp(_waveCounter, 3, 9);
 
         //ObstaclesParents[ObstaclesParents.Count-1].GridLayoutGroup.cellSize = new Vector2(ObstaclesQuantity, ObstaclesQuantity);
 
-        #endregion
+        #endregion 
 
         #region Speed
 
-        Speed = Mathf.Clamp(_waveCounter, 4.5f, 9);
+        Speed = Mathf.Clamp(_waveCounter, 4.5f, 12);
 
         #endregion
 
         #region SpawnRate
 
-        //SpawnRate = Mathf.Clamp(_waveCounter, 4, 2);
+        //SpawnRate = Mathf.Abs(Mathf.Clamp(_waveCounter, 6f, 1f));
+
+        if (_waveCounter % 3 == 0 && !_modified)
+        {
+            SpawnRate -= .5f;
+            _modified = true;
+        }
+        else if(_waveCounter % 3 != 0)
+        {
+            _modified = false;
+        }
         
         #endregion
 
-        print($"wave: {_waveCounter} \n" +
-              $"HP\n" +
-              $" _obstacleMinimumHpModifier: {_obstacleMinimumHpModifier}, _obstacleMaximumHpModifier: {_obstacleMaximumHpModifier}\n" +
-              $"_obstacleMinimumHp: {_obstacleMinimumHp}, _obstacleMaximumHp: {_obstacleMaximumHp}\n" +
-              $"Quantity: {ObstaclesQuantity}\n" +
-              $"Speed: {Speed}\n" +
-              $"SpawnRate: {SpawnRate}");
+        // print($"wave: {_waveCounter} \n" +
+        //       $"HP\n" +
+        //       $" _obstacleMinimumHpModifier: {_obstacleMinimumHpModifier}, _obstacleMaximumHpModifier: {_obstacleMaximumHpModifier}\n" +
+        //       $"_obstacleMinimumHp: {_obstacleMinimumHp}, _obstacleMaximumHp: {_obstacleMaximumHp}\n" +
+        //       $"Quantity: {ObstaclesQuantity}\n" +
+        //       $"Speed: {Speed}\n" +
+        //       $"SpawnRate: {SpawnRate}");
 
         //todo: process hp, amount, grid.cell size... (formula?)
     }
@@ -185,6 +200,8 @@ public class ObstacleController : MonoBehaviour, IMovement, IObstaclesSpawn, IDi
         if(_isTriggered) { return; }
         DestroyObstacles();
         _isTriggered = true;
+        PlayerController.IsPlaying = false;
+        gameObject.SetActive(false);
         _uiController.ToggleUi(false);
     }
 }

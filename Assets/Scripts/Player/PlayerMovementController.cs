@@ -44,6 +44,6 @@ public class PlayerMovementController : MonoBehaviour
 
         //print($"pos: {transform.position}, newValue: {value}, diff: {transform.position.x - value}");
         //if (transform.position.x - value < 2f) { return;} 
-        _playerSpriteController.GetPlayerSkinInstance().transform.position = new Vector2(value, transform.position.y);
+        transform.position = new Vector2(value, transform.position.y);
     }
 }

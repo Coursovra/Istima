@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -6,7 +7,8 @@ using UnityEngine;
 public class SkinView : MonoBehaviour
 {
     public SpriteRenderer SpriteRenderer;
-    [SerializeField] private GameObject[] _projectileSpawnPoints;
+    [SerializeField] private List<GameObject> _projectileSpawnPoints;
+    [SerializeField] private List<GameObject> _additionalProjectileSpawnPoints;
     [SerializeField] public float Price;
     [SerializeField] public string Name;
     [SerializeField] public string Description;
@@ -14,8 +16,21 @@ public class SkinView : MonoBehaviour
     [SerializeField] public float AttackSpeed;
     [SerializeField] public int Id;
     
-    public GameObject[] GetProjectileSpawnPoints()
+    public List<GameObject> GetProjectileSpawnPoints()
     {
         return _projectileSpawnPoints;
+    }
+    
+    public List<GameObject> GetAdditionalProjectileSpawnPoints()
+    {
+        return _additionalProjectileSpawnPoints;
+    }
+
+    public void SwitchAdditionalSpawnPoints(bool value)
+    {
+        foreach (var additionalProjectileSpawnPoint in _additionalProjectileSpawnPoints)
+        {
+            additionalProjectileSpawnPoint.SetActive(value);
+        }
     }
 }

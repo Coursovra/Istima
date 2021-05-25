@@ -5,7 +5,7 @@ using UnityEngine;
 /// </summary>
 public static class PlayerPrefsController
 {
-    private const string MySkinsStringPattern = "{Id}-{Damage}-{AttackSpeed};";
+    private const string MySkinsStringPattern = "{Id}-{DamagePercent}-{AttackSpeedPercent};";
     
     #region Set
 

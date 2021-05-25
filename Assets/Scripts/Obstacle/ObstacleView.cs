@@ -17,7 +17,7 @@ public class ObstacleView : MonoBehaviour
     //[SerializeField] private Material _material;
     [SerializeField] private TMP_Text _hpText;
     [SerializeField] private int _scoreForHit;
-    public event Action OnPlayerDeath;
+    public static event Action OnPlayerDeath;
     private BoxCollider2D _boxCollider2D;
     //public event Action<float> OnTakeDamage;
 
@@ -64,6 +64,21 @@ public class ObstacleView : MonoBehaviour
         {
             DisableObstacle();
         }
+        
+        if (hitPoints.ToString().Length <= 4) //todo: ????
+            _hpText.fontSize = .4f;
+        else if (hitPoints.ToString().Length == 5)
+            _hpText.fontSize = .3f;
+        else if (hitPoints.ToString().Length == 6)
+            _hpText.fontSize = .25f;
+        else if (hitPoints.ToString().Length == 7)
+            _hpText.fontSize = .2f;
+        else if (hitPoints.ToString().Length < 11)
+            _hpText.fontSize = .15f;
+        else if (hitPoints.ToString().Length > 11)
+            _hpText.fontSize = .1f;
+
+        
     }
 
     /// <summary>

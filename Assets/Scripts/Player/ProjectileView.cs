@@ -22,7 +22,9 @@ public class ProjectileView : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        transform.position += Vector3.up * (Time.deltaTime * _speed);
+        //transform.position += Vector3.up * (Time.deltaTime * _speed);
+        //GetComponent<Rigidbody2D>().AddForce(transform.forward * 100);
+        GetComponent<Rigidbody2D>().velocity = transform.forward * 1000;
     }
 
     /// <summary>

@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "ce11171b7896eb3503",
         "name": "com.DefaultCompany.Istima",
-        "processId": 29497,
+        "processId": 25813,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -60,6 +60,12 @@
             "deviceId": "ce11171b7896eb3503",
             "name": "com.DefaultCompany.Istima",
             "processId": 29497,
+            "exited": false
+        },
+        {
+            "deviceId": "ce11171b7896eb3503",
+            "name": "com.DefaultCompany.Istima",
+            "processId": 25813,
             "exited": false
         }
     ],
