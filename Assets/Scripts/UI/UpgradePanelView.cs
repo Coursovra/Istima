@@ -12,6 +12,8 @@ public class UpgradePanelView : MonoBehaviour //todo: balance???
     [SerializeField] private TMP_Text _attackSpeedTextt;
     [SerializeField] private PlayerSpriteController _playerSpriteController;
     [SerializeField] private ScoreView _scoreView;
+    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private AudioClip _audioClip;
     private float _damagePriceModifier = 10f;
     private float _attackSpeedPriceModifier = 200f;
     private float _damageUpgradeModifier = .1f;
@@ -54,6 +56,7 @@ public class UpgradePanelView : MonoBehaviour //todo: balance???
     {
         if (_scoreView.Score < DamagePrice) { return; }
 
+        _audioSource.PlayOneShot(_audioClip);
         _scoreView.Score -= DamagePrice;
         _selectedSkin.Damage += DamageUpgrade;
 
@@ -65,6 +68,7 @@ public class UpgradePanelView : MonoBehaviour //todo: balance???
     {
         if (_scoreView.Score < AttackSpeedPrice) { return; }
         
+        _audioSource.PlayOneShot(_audioClip);
         _scoreView.Score -= AttackSpeedPrice;
         _selectedSkin.AttackSpeed += AttackSpeedUpgrade;
         

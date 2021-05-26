@@ -30,20 +30,27 @@ public class PlayerAttackController : MonoBehaviour
         set => _projectilePrefab.GetComponent<ProjectileView>().Speed = value;
     }
     
+    private const float ScorePerAttackModifier = .04f;
     [SerializeField] private List<GameObject> _projectileSpawnPoints;
     [SerializeField] private GameObject _projectilePrefab;
     [SerializeField] private Transform _projectileParentTransorm;
     [SerializeField] private ScoreView _scoreView;
     [SerializeField] private PlayerSpriteController _playerSpriteController;
+    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private AudioClip _attackSfx;
     private List<GameObject> _projectilePrefabs = new List<GameObject>();
     private int _damage;
-    private float _attackSpeed;
     private int _damageBoost;
+    private float _attackSpeed;
     private float _attackSpeedBoost;
     private float _lastAttackTimer;
     private SkinView _selectedSkin;
     #endregion
-    
+
+    public ProjectileView GetProjectileView()
+    {
+        return _projectilePrefab.GetComponent<ProjectileView>();
+    }
     public void SetDamageBoost(float damageBoost)
     {
         _damageBoost += (int) (_damage * damageBoost);
@@ -51,6 +58,11 @@ public class PlayerAttackController : MonoBehaviour
     public void SetAttackSpeedBoost(float attackSpeedBoost)
     {
         _attackSpeedBoost += _attackSpeed * attackSpeedBoost;
+    }
+
+    public void SetAttackSfx(AudioClip audioClip)
+    {
+        _attackSfx = audioClip;
     }
 
     /// <summary>
@@ -153,6 +165,8 @@ public class PlayerAttackController : MonoBehaviour
                 _projectileParentTransorm);
             
             _projectilePrefabs.Add(projectileInstance);
+            
+            _audioSource.PlayOneShot(_attackSfx);
         }
     }
     
@@ -165,7 +179,7 @@ public class PlayerAttackController : MonoBehaviour
     {
         obstacleView.SetHitPoints((int) (obstacleView.HitPoints - (Damage + _damageBoost)));
         _scoreView.CurrentScore += (int) Math.Round(
-            obstacleView.ScoreForHit * (Damage + _damageBoost) * .1f, 
+            obstacleView.ScoreForHit * (Damage + _damageBoost) * ScorePerAttackModifier, 
             MidpointRounding.AwayFromZero); 
         //todo: balance??
     }

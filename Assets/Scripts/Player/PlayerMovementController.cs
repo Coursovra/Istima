@@ -21,8 +21,8 @@ public class PlayerMovementController : MonoBehaviour
         _slider.onValueChanged.AddListener(OnValueChanged);
         _slider.maxValue = _worldDimensions.x;
         _slider.minValue = -_worldDimensions.x;
-        var spriteRenderer = _playerSpriteController.GetPlayerSkinInstance().GetComponent<SpriteRenderer>();
-        Vector2 spriteSize = spriteRenderer.sprite.rect.size;
+        var skinView = _playerSpriteController.GetPlayerSkinInstance().GetComponent<SkinView>();
+        Vector2 spriteSize = skinView.SpriteRenderer.sprite.rect.size;
         _rectTransform.sizeDelta = new Vector2(spriteSize.x,_worldDimensions.y);
     }
     

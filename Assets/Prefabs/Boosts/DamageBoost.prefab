@@ -102,7 +102,10 @@ MonoBehaviour:
   _icon: {fileID: 21300000, guid: c55eb33d4272aa541b0d1a8a29352d52, type: 3}
   damagePercent: 0.5
   attackSpeedPercent: 0
-  _playerAttackController: {fileID: 0}
+  _defaultProjectileSprite: {fileID: 21300026, guid: 8aeb9e233fbb8f14db39770841b78b94,
+    type: 3}
+  _damageBoostProjectileSprite: {fileID: 21300014, guid: 8aeb9e233fbb8f14db39770841b78b94,
+    type: 3}
 --- !u!61 &4806031155827233924
 BoxCollider2D:
   m_ObjectHideFlags: 0

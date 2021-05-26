@@ -14,8 +14,15 @@ public class ProjectileView : MonoBehaviour
         set => _speed = value;
     }
     [SerializeField] private float _speed;
+    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private AudioClip _audioClip;
     
     #endregion
+
+    public void SetSprite(Sprite sprite)
+    {
+        GetComponent<SpriteRenderer>().sprite = sprite;
+    }
 
     /// <summary>
     /// Движение объекта вверх по y-оси
@@ -35,6 +42,7 @@ public class ProjectileView : MonoBehaviour
     {
         if (other.CompareTag("Obstacle"))
         {
+            _audioSource.PlayOneShot(_audioClip);
             OnHit?.Invoke(other.GetComponent<ObstacleView>());
             Destroy(gameObject);
         }

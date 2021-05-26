@@ -40,6 +40,10 @@ public class BoostStats : MonoBehaviour, IBoost
     [SerializeField] private Sprite _icon;
     [SerializeField] private float damagePercent;
     [SerializeField] private float attackSpeedPercent;
+    [SerializeField] private Sprite _defaultProjectileSprite;
+    [SerializeField] private Sprite _damageBoostProjectileSprite;
+    [SerializeField] private AudioClip _defaultAttackSfx;
+    [SerializeField] private AudioClip _damageBoostAttackSfx;
     private float _timer;
     private GameObject _prefab;
     private Camera _camera;
@@ -52,12 +56,22 @@ public class BoostStats : MonoBehaviour, IBoost
     
     public void EnableEffect(PlayerAttackController playerAttackController)
     {
+        if (damagePercent > 0)
+        {
+            //playerAttackController.SetAttackSfx(_damageBoostAttackSfx);
+            playerAttackController.GetProjectileView().SetSprite(_damageBoostProjectileSprite);
+        }
         playerAttackController.SetDamageBoost(damagePercent);
         playerAttackController.SetAttackSpeedBoost(attackSpeedPercent);
     }
 
     public void DisableEffect(PlayerAttackController playerAttackController)
     {
+        if (damagePercent > 0)
+        {
+            //playerAttackController.SetAttackSfx(_defaultAttackSfx);
+            playerAttackController.GetProjectileView().SetSprite(_defaultProjectileSprite);
+        }
         playerAttackController.SetDamageBoost(-damagePercent);
         playerAttackController.SetAttackSpeedBoost(-attackSpeedPercent);
     }

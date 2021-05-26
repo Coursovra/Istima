@@ -130,35 +130,34 @@ using UnityEngine;
 
         #region Speed
 
-        Speed = Mathf.Clamp(_waveCounter, 4.5f, 12);
+        Speed = Mathf.Clamp(_waveCounter, 5f, 12);
 
         #endregion
 
         #region SpawnRate
 
-        //SpawnRate = Mathf.Abs(Mathf.Clamp(_waveCounter, 6f, 1f));
+        if (SpawnRate > 1.5f)
+        {
+            if (_waveCounter % 3 == 0 && !_modified)
+            {
+                SpawnRate -= .4f;
+                _modified = true;
+            }
+            else if (_waveCounter % 3 != 0)
+            {
+                _modified = false;
+            }
+        }
 
-        if (_waveCounter % 3 == 0 && !_modified)
-        {
-            SpawnRate -= .5f;
-            _modified = true;
-        }
-        else if(_waveCounter % 3 != 0)
-        {
-            _modified = false;
-        }
-        
         #endregion
 
-        // print($"wave: {_waveCounter} \n" +
-        //       $"HP\n" +
-        //       $" _obstacleMinimumHpModifier: {_obstacleMinimumHpModifier}, _obstacleMaximumHpModifier: {_obstacleMaximumHpModifier}\n" +
-        //       $"_obstacleMinimumHp: {_obstacleMinimumHp}, _obstacleMaximumHp: {_obstacleMaximumHp}\n" +
-        //       $"Quantity: {ObstaclesQuantity}\n" +
-        //       $"Speed: {Speed}\n" +
-        //       $"SpawnRate: {SpawnRate}");
-
-        //todo: process hp, amount, grid.cell size... (formula?)
+        print($"wave: {_waveCounter} \n" +
+              $"HP\n" +
+              $" _obstacleMinimumHpModifier: {_obstacleMinimumHpModifier}, _obstacleMaximumHpModifier: {_obstacleMaximumHpModifier}\n" +
+              $"_obstacleMinimumHp: {_obstacleMinimumHp}, _obstacleMaximumHp: {_obstacleMaximumHp}\n" +
+              $"Quantity: {ObstaclesQuantity}\n" +
+              $"Speed: {Speed}\n" +
+              $"SpawnRate: {SpawnRate}");
     }
     
     /// <summary>

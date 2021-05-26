@@ -15,7 +15,7 @@ public class SkinView : MonoBehaviour
     [SerializeField] public float Damage;
     [SerializeField] public float AttackSpeed;
     [SerializeField] public int Id;
-    
+  
     public List<GameObject> GetProjectileSpawnPoints()
     {
         return _projectileSpawnPoints;

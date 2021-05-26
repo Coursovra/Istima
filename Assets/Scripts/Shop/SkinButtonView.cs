@@ -39,7 +39,6 @@ public class SkinButtonView : MonoBehaviour
     private void Start()
     {
         var spriteRenderer = _skinView.SpriteRenderer;
-        //_infoPanelView = FindObjectOfType<ShopItemInfoPanelView>(); //bug: не находит (не активен GO)
         _price = (int) _skinView.Price;
         name = _skinView.Name;
         _nameText.text = _skinView.Name;

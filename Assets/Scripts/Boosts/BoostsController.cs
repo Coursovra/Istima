@@ -13,13 +13,13 @@ public class BoostsController : MonoBehaviour
     [SerializeField] private PlayerAttackController _playerAttackController;
     private List<IBoost> _activeBoosts = new List<IBoost>();
     private List<GameObject> _spawnedBoostPrefabs = new List<GameObject>();
-    //private IBoost _currentBoost;
     private float _timer;
-    private float _chanceToSpawn = 1;
-    private float _spawnRate = 1;
+    private float _chanceToSpawn = .1f;
+    private float _spawnRate = 1f;
     private float _lastSpawnWave;
     private float _spawnYPosition;
     private float _spawnXPosition;
+    private float xOffset = .3f;
     private float _spawnYOffset = 1f;
 
     private void Start()
@@ -59,6 +59,9 @@ public class BoostsController : MonoBehaviour
         
         _activeBoosts.Clear();
         _spawnedBoostPrefabs.Clear();
+
+        _spawnRate = 1;
+        _chanceToSpawn = .1f;
     }
 
     private void SpawnHandler()
@@ -66,18 +69,25 @@ public class BoostsController : MonoBehaviour
         if (Random.value <= _chanceToSpawn)
         {
             var worldDimensions = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 1));
-            _spawnXPosition = Random.Range(-worldDimensions.x, worldDimensions.x);
+            _spawnXPosition = Random.Range(-worldDimensions.x + worldDimensions.x * xOffset, worldDimensions.x - worldDimensions.x * xOffset);
             var spawnPosition = new Vector2(_spawnXPosition, _spawnYPosition);
-            var boostPrefab = Instantiate(_availableBoosts[Random.Range(2, _availableBoosts.Length)], spawnPosition, Quaternion.identity, transform);
+            var boostPrefab = Instantiate(_availableBoosts[Random.Range(0, _availableBoosts.Length)], spawnPosition, Quaternion.identity, transform);
             var boost = boostPrefab.GetComponent<IBoost>();
             boost.OnPickedUp += OnPickedUp;
             boost.OnTimeIsUp += OnTimeIsUp;
             boost.OnInvisible += OnInvisible;
             boost.Prefab = boostPrefab;
             _spawnedBoostPrefabs.Add(boostPrefab);
+            _chanceToSpawn = .1f;
+            _spawnRate = Random.Range(2, 5);
+        }
+        else
+        {
+            _chanceToSpawn += .2f;
         }
     }
-    
+
+
     private void Update()
     {
         if (_obstacleController.GetCurrentWave() > _lastSpawnWave + _spawnRate)
