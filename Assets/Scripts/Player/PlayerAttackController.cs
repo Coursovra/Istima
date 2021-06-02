@@ -178,9 +178,14 @@ public class PlayerAttackController : MonoBehaviour
     private void ProjectileViewOnHit(ObstacleView obstacleView)
     {
         obstacleView.SetHitPoints((int) (obstacleView.HitPoints - (Damage + _damageBoost)));
-        _scoreView.CurrentScore += (int) Math.Round(
-            obstacleView.ScoreForHit * (Damage + _damageBoost) * ScorePerAttackModifier, 
-            MidpointRounding.AwayFromZero); 
+        var scoreToAdd = (int) Math.Round(
+            obstacleView.ScoreForHit * (Damage + _damageBoost) * ScorePerAttackModifier,
+            MidpointRounding.AwayFromZero);
+        if (scoreToAdd == 0)
+        {
+            scoreToAdd++;
+        }
+        _scoreView.CurrentScore += scoreToAdd; 
         //todo: balance??
     }
 }

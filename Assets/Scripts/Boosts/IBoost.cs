@@ -1,6 +1,9 @@
 using System;
 using UnityEngine;
 
+/// <summary>
+/// Интерфейс для усилений
+/// </summary>
 public interface IBoost
 {
     Sprite Icon { get; }

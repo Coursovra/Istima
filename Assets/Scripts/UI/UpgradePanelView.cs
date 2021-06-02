@@ -48,8 +48,8 @@ public class UpgradePanelView : MonoBehaviour //todo: balance???
     
     public void UpdateText()
     {
-        _damageTextt.text = $"Урон:\n {_selectedSkin.Damage} (+{DamageUpgrade})\nОчков: {DamagePrice}";
-        _attackSpeedTextt.text = $"Скорость атаки: {_selectedSkin.AttackSpeed} (+{AttackSpeedUpgrade})\nОчков: {AttackSpeedPrice}";
+        _damageTextt.text = $"Урон:\n {Math.Round(_selectedSkin.Damage, 1)} (+{DamageUpgrade})\nОчков: {DamagePrice}";
+        _attackSpeedTextt.text = $"Скорость атаки: {Math.Round(_selectedSkin.AttackSpeed, 1)} (+{AttackSpeedUpgrade})\nОчков: {AttackSpeedPrice}";
     }
     
     public void UpgradeDamage()

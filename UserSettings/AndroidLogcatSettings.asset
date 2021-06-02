@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "ce11171b7896eb3503",
         "name": "com.DefaultCompany.Istima",
-        "processId": 19911,
+        "processId": 4654,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -72,6 +72,24 @@
             "deviceId": "ce11171b7896eb3503",
             "name": "com.DefaultCompany.Istima",
             "processId": 19911,
+            "exited": false
+        },
+        {
+            "deviceId": "ce11171b7896eb3503",
+            "name": "com.DefaultCompany.Istima",
+            "processId": 1270,
+            "exited": false
+        },
+        {
+            "deviceId": "ce11171b7896eb3503",
+            "name": "com.DefaultCompany.Istima",
+            "processId": 2642,
+            "exited": false
+        },
+        {
+            "deviceId": "ce11171b7896eb3503",
+            "name": "com.DefaultCompany.Istima",
+            "processId": 4654,
             "exited": false
         }
     ],

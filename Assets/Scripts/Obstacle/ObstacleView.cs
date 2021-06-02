@@ -14,7 +14,7 @@ public class ObstacleView : MonoBehaviour
         get => _scoreForHit;
         set => _scoreForHit = value;
     }
-    //[SerializeField] private Material _material;
+
     [SerializeField] private TMP_Text _hpText;
     [SerializeField] private int _scoreForHit;
     [SerializeField] private ParticleSystem _particleSystemRed;
@@ -25,7 +25,7 @@ public class ObstacleView : MonoBehaviour
     [SerializeField] private AudioClip _audioClip;
     private ParticleSystem _currentParticleSystem;
     public static event Action OnPlayerDeath;
-    //public event Action<float> OnTakeDamage;
+
     
     /// <summary>
     /// Установка цвета препятствия в зависимости от количества ХП

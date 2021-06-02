@@ -1,8 +1,13 @@
 using System;
 using UnityEngine;
 
+/// <summary>
+/// Усиливает характеристики игрока
+/// </summary>
 public class BoostStats : MonoBehaviour, IBoost
 {
+    #region propety
+    
     public Sprite Icon => _icon;
 
     public Color BoostStatusBarColor => _boostStatusBarColor;
@@ -34,7 +39,9 @@ public class BoostStats : MonoBehaviour, IBoost
     public Action<IBoost> OnInvisible { get; set; }
     
     public bool Activated { get; set; }
-    
+    #endregion
+
+    #region fields
     [SerializeField] private float _duration;
     [SerializeField] private Color _boostStatusBarColor;
     [SerializeField] private Sprite _icon;
@@ -47,6 +54,8 @@ public class BoostStats : MonoBehaviour, IBoost
     private float _timer;
     private GameObject _prefab;
     private Camera _camera;
+    #endregion
+
 
     private void Start()
     {
@@ -54,6 +63,10 @@ public class BoostStats : MonoBehaviour, IBoost
         _timer = _duration;
     }
     
+    /// <summary>
+    /// Включение эффекта усиления
+    /// </summary>
+    /// <param name="playerAttackController">Контроллер атаки игрока</param>
     public void EnableEffect(PlayerAttackController playerAttackController)
     {
         if (damagePercent > 0)
@@ -64,7 +77,11 @@ public class BoostStats : MonoBehaviour, IBoost
         playerAttackController.SetDamageBoost(damagePercent);
         playerAttackController.SetAttackSpeedBoost(attackSpeedPercent);
     }
-
+    
+    /// <summary>
+    /// Выключение эффекта усиления
+    /// </summary>
+    /// <param name="playerAttackController">Контроллер атаки игрока</param>
     public void DisableEffect(PlayerAttackController playerAttackController)
     {
         if (damagePercent > 0)
@@ -76,6 +93,9 @@ public class BoostStats : MonoBehaviour, IBoost
         playerAttackController.SetAttackSpeedBoost(-attackSpeedPercent);
     }
     
+    /// <summary>
+    /// Запуск событий для ObstacleController
+    /// </summary>
     private void Update()
     {
         var distance = -8.0f;
@@ -97,6 +117,10 @@ public class BoostStats : MonoBehaviour, IBoost
         }
     }
 
+    /// <summary>
+    /// Усиление подобрано игроком
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.transform.parent.TryGetComponent<PlayerAttackController>(out var component))

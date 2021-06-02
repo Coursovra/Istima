@@ -1,7 +1,9 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Класс объекта, в котором создаются препятствия
+/// </summary>
 public class ObstacleParentView : MonoBehaviour
 {
     [SerializeField] public GridLayoutGroup GridLayoutGroup;
