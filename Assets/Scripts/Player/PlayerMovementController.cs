@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,14 @@ public class PlayerMovementController : MonoBehaviour
     [SerializeField] private PlayerSpriteController _playerSpriteController; 
     private readonly float _speed = .36f;
     Vector3 _worldDimensions;
+
+    /// <summary>
+    /// Сбрасывает позицию слайдера
+    /// </summary>
+    public void ResetSliderValue()
+    {
+        _slider.value = 0;
+    }
 
     /// <summary>
     /// Конфигурация слайдера, установка настроек в зависимости от размера экрана и размера спрайта игрока

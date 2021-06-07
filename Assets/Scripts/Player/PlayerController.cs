@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private BoostsController _boostsController;
     [SerializeField] private PlayerSpriteController _playerSpriteController;
     [SerializeField] private PlayerAttackController _playerAttackController;
+    [SerializeField] private PlayerMovementController _playerMovementController;
     [SerializeField] private UpgradePanelView _upgradePanelView;
     [SerializeField] private ScoreView _scoreView;
     private readonly Vector2 _startPosition = new Vector2(0, -8);
@@ -84,6 +85,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void ResetPosition()
     {
+        _playerMovementController.ResetSliderValue();
         transform.position = _startPosition;
     }
 

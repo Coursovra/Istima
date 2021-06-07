@@ -7699,6 +7699,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2072644256 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1401543556833683701, guid: f8db928718b4e7e41a65cf27fe1e5a76,
+    type: 3}
+  m_PrefabInstance: {fileID: 1401543555079807598}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2072644250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0507f41a2636524d8d94bc676170f35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2072644257 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2072644257, guid: f8db928718b4e7e41a65cf27fe1e5a76,
@@ -8052,6 +8064,11 @@ PrefabInstance:
       propertyPath: _playerSpriteController
       value: 
       objectReference: {fileID: 2072644257}
+    - target: {fileID: 1401543556833683699, guid: f8db928718b4e7e41a65cf27fe1e5a76,
+        type: 3}
+      propertyPath: _playerMovementController
+      value: 
+      objectReference: {fileID: 2072644256}
     - target: {fileID: 1401543556833683700, guid: f8db928718b4e7e41a65cf27fe1e5a76,
         type: 3}
       propertyPath: m_Name
