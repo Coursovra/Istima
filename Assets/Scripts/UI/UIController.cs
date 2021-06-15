@@ -17,7 +17,6 @@ public class UIController : MonoBehaviour
         DeathScreen.SetActive(!value);
         UpgradePanel.SetActive(!value);
         Menu.SetActive(!value);
-        //StartGameObjects.SetActive(!value); //todo: make animations
         ShopButton.SetActive(!value);
         SettingsButton.SetActive(!value);
     }

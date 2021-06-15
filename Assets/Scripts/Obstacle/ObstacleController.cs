@@ -93,7 +93,7 @@ using UnityEngine;
         DifficultHandler();
         // Debug.Log($"wave: {_waveCounter} \n" +
         //           $"HP\n" +
-        //           $" _obstacleMinimumHpModifier: {_obstacleMinimumHpModifier}, _obstacleMaximumHpModifier: {_obstacleMaximumHpModifier}, _totalModifier: {_totalHpModifier}\n" +
+        //           $" _obstacleMinimumHpModifier: {_obstacleMinimumHpModifier}, _obstacleMaximumHpModifier: {_obstacleMaximumHpModifier}" +
         //           $"_obstacleMinimumHp: {_obstacleMinimumHp}, _obstacleMaximumHp: {_obstacleMaximumHp}\n" +
         //           $"Quantity: {ObstaclesQuantity}\n" +
         //           $"Speed: {Speed}\n" +
@@ -122,12 +122,12 @@ using UnityEngine;
     /// Управление сложностью игры.
     /// Количество препятствий, их хп, скорость движения
     /// </summary>
-    public void DifficultHandler() //todo: balance
+    public void DifficultHandler()
     {
         //_totalHpModifier = _waveCounter * .05f;
         #region HP
-        _obstacleMinimumHpModifier = Mathf.Clamp(_waveCounter, 1, 5);
-        _obstacleMaximumHpModifier = Mathf.Clamp(_waveCounter, 2, 10);
+        _obstacleMinimumHpModifier = Mathf.Clamp(_waveCounter * .3f, 1, 5);
+        _obstacleMaximumHpModifier = Mathf.Clamp(_waveCounter * .3f, 2, 9);
         _obstacleMinimumHp = (int) (_playerDps * _obstacleMinimumHpModifier * Random.Range(_minimumRandomModifier, _maximumRandomModifier));
         if (_obstacleMinimumHp == 0)
         {

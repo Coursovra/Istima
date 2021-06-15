@@ -36,7 +36,7 @@ public class ShopController : MonoBehaviour
     /// <summary>
     /// Отписка от события при уничтожении магазина
     /// </summary>
-    private void OnDestroy() //todo: OnInvisible?
+    private void OnDestroy()
     {
         ShopItemInfoPanelView.OnBuyButtonClicked -= InfoPanelViewOnBuyButtonClicked;
     }

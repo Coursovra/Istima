@@ -125,10 +125,8 @@ public class PlayerAttackController : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        //print(_attackSpeedBoost);
-
         _lastAttackTimer += Time.deltaTime;
-        if (!PlayerController.IsPlaying) //todo: можно убрать?
+        if (!PlayerController.IsPlaying)
         {
             foreach (var projectileView in _projectilePrefabs)
             {
@@ -185,7 +183,6 @@ public class PlayerAttackController : MonoBehaviour
         {
             scoreToAdd++;
         }
-        _scoreView.CurrentScore += scoreToAdd; 
-        //todo: balance??
+        _scoreView.CurrentScore += scoreToAdd;
     }
 }

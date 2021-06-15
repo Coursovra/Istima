@@ -6,7 +6,7 @@ using UnityEngine;
 /// Улучшение характеристик игрока;
 /// Цены и значения улучшений формируются в зависимости от текщих характеристик игрока
 /// </summary>
-public class UpgradePanelView : MonoBehaviour //todo: balance???
+public class UpgradePanelView : MonoBehaviour
 {
     [SerializeField] private TMP_Text _damageTextt;
     [SerializeField] private TMP_Text _attackSpeedTextt;

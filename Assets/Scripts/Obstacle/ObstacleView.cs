@@ -31,7 +31,7 @@ public class ObstacleView : MonoBehaviour
     /// Установка цвета препятствия в зависимости от количества ХП
     /// </summary>
     /// <param name="hitPoints"> Количество ХП </param>
-    public void SetHitPoints(int hitPoints) //todo: refactoring?
+    public void SetHitPoints(int hitPoints)
     {
         HitPoints = hitPoints;
         _hpText.text = hitPoints.ToString();

@@ -98,6 +98,7 @@ public class BoostsController : MonoBehaviour
             _spawnedBoostPrefabs.Add(boostPrefab);
             _chanceToSpawn = .1f;
             _spawnRate = Random.Range(2, 5);
+            _lastSpawnWave = _obstacleController.GetCurrentWave();
         }
         else
         {
@@ -110,33 +111,31 @@ public class BoostsController : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        if (_activeBoosts.Count == 0)
-        {
-            _boostIcon.gameObject.SetActive(false);
-            _boostStatus.gameObject.SetActive(false);
-            return;
-        }
-        
         if (_obstacleController.GetCurrentWave() > _lastSpawnWave + _spawnRate)
         {
             SpawnHandler();
-            _lastSpawnWave = _obstacleController.GetCurrentWave();
         }
         
-        if (_spawnedBoostPrefabs.Count == 0) { return; }
-
         foreach (var boostPrefab in _spawnedBoostPrefabs)
         {
             boostPrefab.transform.position -= new Vector3(0, _obstacleController.Speed * Time.deltaTime, 0);
         }
         
-        _boostIcon.gameObject.SetActive(true);
-        _boostStatus.gameObject.SetActive(true);
-
-        _boostStatus.color = _activeBoosts[0].BoostStatusBarColor;
-        _timer += Time.deltaTime;
-        var percent = _timer / _activeBoosts[0].Duration;
-        _boostStatus.fillAmount = 1 - Mathf.Lerp(0, 1, percent);
+        
+        if (_activeBoosts.Count == 0)
+        {
+            _boostIcon.gameObject.SetActive(false);
+            _boostStatus.gameObject.SetActive(false);
+        }
+        else
+        {
+            _boostIcon.gameObject.SetActive(true);
+            _boostStatus.gameObject.SetActive(true);
+            _boostStatus.color = _spawnedBoostPrefabs[0].GetComponent<IBoost>().BoostStatusBarColor;
+            _timer += Time.deltaTime;
+            var percent = _timer / _spawnedBoostPrefabs[0].GetComponent<IBoost>().Duration;
+            _boostStatus.fillAmount = 1 - Mathf.Lerp(0, 1, percent);
+        }
     }
 
     /// <summary>
